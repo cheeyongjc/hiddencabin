@@ -10,7 +10,7 @@ class Cabin(db.Model):
     price = db.Column(db.Integer, nullable=False)
     guests = db.Column(db.Integer)
     beds = db.Column(db.Integer, nullable=False)
-    description = db.Column(db.Text(200), nullable=False)
+    description = db.Column(db.Text, nullable=False)
 
     def to_dict(self):
         return {

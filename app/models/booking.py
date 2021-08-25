@@ -6,7 +6,7 @@ class Booking(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, db.ForeignKey('users.id'))
-    cabinId = db.Column(db.Integer, db.ForeignKey('cabin.id'))
+    cabinId = db.Column(db.Integer, db.ForeignKey('cabins.id'))
     checkin = db.Column(db.Date)
     checkout = db.Column(db.Date)
 
