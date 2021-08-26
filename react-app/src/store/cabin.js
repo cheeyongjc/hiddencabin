@@ -24,7 +24,7 @@ const deleteCabin = (cabin) => ({
 });
 
 
-export const getCabins = () => async (dispatch) => {
+export const getCabinsThunk = () => async (dispatch) => {
     const res = await fetch(`/api/cabins/`);
     const cabins = await res.json();
     dispatch(load(cabins));
