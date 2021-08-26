@@ -6,9 +6,10 @@ import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/navigation/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import Home from './components/homepage/home';
+import Splashpage from './components/splashpage/splashpage';
+import { authenticate } from './store/session';
 // import UsersList from './components/UsersList';
 // import User from './components/User';
-import { authenticate } from './store/session';
 
 
 function App() {
@@ -46,9 +47,10 @@ function App() {
           <User />
         </ProtectedRoute> */}
 
-        <Route>
-          
+        <Route path='/splash' exact={true}>
+          <Splashpage />
         </Route>
+
         <ProtectedRoute path='/' exact={true} >
           <Home />
         </ProtectedRoute>
