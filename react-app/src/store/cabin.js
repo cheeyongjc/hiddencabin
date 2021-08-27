@@ -27,7 +27,7 @@ const deleteCabin = (cabin) => ({
 export const getCabinsThunk = () => async (dispatch) => {
     const res = await fetch(`/api/cabins/`);
     const cabins = await res.json();
-    dispatch(load(cabins));
+    dispatch(loadCabin(cabins));
 };
 
 export const addCabinThunk = payload => async dispatch => {
@@ -40,21 +40,21 @@ export const addCabinThunk = payload => async dispatch => {
     });
     if (res.ok) {
         const cabin = await res.json();
-        dispatch(add(cabin));
+        dispatch(addCabin(cabin));
         return cabin;
     } else {
         let err = await res.json();
         console.log('ERROR', err)
     }
-},
+}
 
 const initialState = {}
 const cabinReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD:
             const newCabins = {};
-            action.cabins.cabin.forEach(pricing => {
-                newCabins[cabins.id] = cabin;
+            action.cabins.cabins.forEach(cabin => {
+                newCabins[cabin.id] = cabin;
             });
             return newCabins;
         default:
