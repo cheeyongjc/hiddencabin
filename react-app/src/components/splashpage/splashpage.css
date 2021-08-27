@@ -1,0 +1,37 @@
+.splashContainer{
+    width:100%;
+    height: 96vh;
+    overflow: hidden;
+    position: relative;
+    background-image: url(cabinpic1.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    animation-delay: 5s;
+    animation-name: slide;
+    animation-duration: 25s;
+    animation-iteration-count: infinite;
+}
+
+.splashTitle{
+    font-size: 30px;
+    color: rgb(123, 123, 184);
+}
+.splashTitle{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    text-align: center;
+}
+
+@keyframes slide {
+    0% {
+        background-image: url(cabinpic1.jpg)
+       }
+    33% {
+        background-image: url(cabinpic2.jpg)
+        }
+    66% {
+        background-image: url(cabinpic3.jpg)
+        }
+  }
