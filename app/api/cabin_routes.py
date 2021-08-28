@@ -20,7 +20,7 @@ def create_cabin():
             hostId=form.data['hostId'],
             name=form.data['name'],
             price=form.data['price'],
-            guest=form.data['guests'],
+            guests=form.data['guests'],
             beds=form.data['beds'],
             description=form.data['description']
         )
