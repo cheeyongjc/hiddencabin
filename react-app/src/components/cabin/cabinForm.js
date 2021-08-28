@@ -31,8 +31,10 @@ const CabinForm = () => {
         history.push('/');
     };
     return(
-        <form onSubmit={cabinSubmit}>
+        <div className='formStyle formContainer'>
+        <form className='formstyle' onSubmit={cabinSubmit}>
 
         </form>
+        </div>
     )
 }
