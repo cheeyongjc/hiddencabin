@@ -17,6 +17,7 @@
     border: transparent;
     padding: none;
 }
+
 .navLogout{
     grid-column: 19/20;
     text-decoration: none;

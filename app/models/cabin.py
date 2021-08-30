@@ -11,7 +11,7 @@ class Cabin(db.Model):
     guests = db.Column(db.Integer)
     beds = db.Column(db.Integer, nullable=False)
     description = db.Column(db.Text, nullable=False)
-    image = db.Column(db.Text, nullable=False)
+    image = db.Column(db.String, nullable=False)
 
     def to_dict(self):
         return {
