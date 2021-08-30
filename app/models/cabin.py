@@ -11,6 +11,7 @@ class Cabin(db.Model):
     guests = db.Column(db.Integer)
     beds = db.Column(db.Integer, nullable=False)
     description = db.Column(db.Text, nullable=False)
+    image = db.Column(db.Text, nullable=False)
 
     def to_dict(self):
         return {
@@ -20,5 +21,6 @@ class Cabin(db.Model):
             'price': self.price,
             'guests': self.guests,
             'beds': self.beds,
-            'description': self.description
+            'description': self.description,
+            'image': self.image
         }

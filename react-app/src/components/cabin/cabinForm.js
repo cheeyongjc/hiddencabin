@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { getUsers } from '../../store/users.js';
 import {addCabinThunk} from '../../store/cabin';
-import { useParams, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import './cabin.css';
 
 const CabinForm = () => {

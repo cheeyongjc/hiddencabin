@@ -1,6 +1,5 @@
 from flask import Blueprint, request
 from flask_login import login_required
-from sqlalchemy.sql.operators import json_getitem_op
 from app.models import db, Cabin
 from app.forms import CabinForm
 from .auth_routes import validation_errors_to_error_messages
@@ -42,7 +41,6 @@ def delete_cabin(id):
     return {'message': id}
 
 @cabin_routes.route('/<int:id>', methods=['PATCH'])
-@login_required
 def edit_cabin(id):
     data = request.json
     cabin = Cabin.query.get(id)
@@ -50,5 +48,6 @@ def edit_cabin(id):
     cabin.price = data['price'] if data['price'] else cabin.price
     cabin.guests = data['guests'] if data['guests'] else cabin.guests
     cabin.description = data['description'] if data['description'] else cabin.description
+    cabin.image = data['image'] if data['image'] else cabin.description
     db.session.commit()
     return {'message': id}

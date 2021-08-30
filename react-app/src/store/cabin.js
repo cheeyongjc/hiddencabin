@@ -60,6 +60,18 @@ export const deleteCabinsThunk = (id) => async dispatch => {
     }
 }
 
+export const editCabinsThunk = (id, payload) => async dispatch => {
+    const res = await fetch(`/api/cabins/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+    })
+    const cabin = await res.json();
+    await dispatch(editCabin(cabin))
+}
+
 const initialState = {}
 const cabinReducer = (state = initialState, action) => {
     switch (action.type) {
