@@ -7,7 +7,9 @@ import NavBar from './components/navigation/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import Home from './components/homepage/home';
 import Splashpage from './components/splashpage/splashpage';
+import CabinForm from './components/cabin/cabinForm';
 import { authenticate } from './store/session';
+import OneCabin from './components/cabin/cabin';
 // import UsersList from './components/UsersList';
 // import User from './components/User';
 
@@ -53,6 +55,14 @@ function App() {
 
         <ProtectedRoute path='/' exact={true} >
           <Home />
+        </ProtectedRoute>
+
+        <ProtectedRoute path='/createCabin' exact={true} >
+          <CabinForm />
+        </ProtectedRoute>
+
+        <ProtectedRoute path='/cabin/:id' exact={true} >
+          <OneCabin />
         </ProtectedRoute>
 
       </Switch>
