@@ -9,3 +9,4 @@ class CabinForm(FlaskForm):
     guests = IntegerField('guests', validators=[DataRequired()])
     beds = IntegerField('beds', validators=[DataRequired()])
     description = TextAreaField('description', validators=[DataRequired()])
+    image = StringField('image', validators=[DataRequired()])

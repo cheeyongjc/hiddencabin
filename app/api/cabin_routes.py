@@ -48,7 +48,6 @@ def edit_cabin(id):
     cabin.price = data['price'] if data['price'] else cabin.price
     cabin.guests = data['guests'] if data['guests'] else cabin.guests
     cabin.description = data['description'] if data['description'] else cabin.description
+    cabin.image = data['image'] if data['image'] else cabin.description
     db.session.commit()
     return {'message': id}
-
-

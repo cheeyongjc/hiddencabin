@@ -112,8 +112,6 @@ function OneCabin(cabin) {
                 <button onClick={deleteClick}>Delete</button>
             </div>
             {editDom}
-
-
         </>
     )
 }
