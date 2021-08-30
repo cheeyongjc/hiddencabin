@@ -16,6 +16,7 @@ function OneCabin(cabin) {
     const [guests, setGuests] = useState(0);
     const [beds, setBeds] = useState(0);
     const [description, setDescription] = useState('');
+    const [image, setImage] = useState('');
 
 
     const deleteClick = async (e) => {
@@ -27,19 +28,20 @@ function OneCabin(cabin) {
     }
     const cabinUpdate = async (e) => {
         e.preventDefault();
-       await dispatch(editCabinsThunk(id, {
+        await dispatch(editCabinsThunk(id, {
             hostId: user.Id,
             name,
             price,
             guests,
             beds,
-            description
+            description,
+            image
         }))
         history.push('/');
     }
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getCabinsThunk());
-    },[name,price,guests,beds,description])
+    }, [name, price, guests, beds, description, image])
     let editDom = (
         <form className='formstyle' onSubmit={cabinUpdate}>
             <div className='errorsContainer'>
@@ -100,6 +102,17 @@ function OneCabin(cabin) {
                         type='textarea'
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
+                    />
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    Image URL:
+                    <input
+                        type='text'
+                        value={image}
+                        onChange={(e) => setImage(e.target.value)}
                     />
                 </label>
             </div>

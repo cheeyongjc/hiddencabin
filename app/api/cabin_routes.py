@@ -24,7 +24,8 @@ def create_cabin():
             price=form.data['price'],
             guests=form.data['guests'],
             beds=form.data['beds'],
-            description=form.data['description']
+            description=form.data['description'],
+            image=form.data['description']
         )
         db.session.add(cabin)
         db.session.commit()
@@ -48,6 +49,6 @@ def edit_cabin(id):
     cabin.price = data['price'] if data['price'] else cabin.price
     cabin.guests = data['guests'] if data['guests'] else cabin.guests
     cabin.description = data['description'] if data['description'] else cabin.description
-    cabin.image = data['image'] if data['image'] else cabin.description
+    cabin.image = data['image'] if data['image'] else cabin.image
     db.session.commit()
     return {'message': id}
