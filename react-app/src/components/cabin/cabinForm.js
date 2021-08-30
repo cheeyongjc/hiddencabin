@@ -15,6 +15,7 @@ const CabinForm = () => {
     const [guests, setGuests] = useState(0);
     const [beds, setBeds] = useState(0);
     const [description, setDescription] = useState('');
+    const [image, setImage] =useState('');
 
     useEffect(() => {
         dispatch(getUsers());
@@ -28,7 +29,8 @@ const CabinForm = () => {
             price,
             guests,
             beds,
-            description
+            description,
+            image
         }))
         history.push('/');
     };
@@ -93,6 +95,17 @@ const CabinForm = () => {
                             type='textarea'
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
+                        />
+                    </label>
+                </div>
+
+                <div>
+                    <label>
+                        Image URL:
+                        <input
+                            type='text'
+                            value={image}
+                            onChange={(e) => setImage(e.target.value)}
                         />
                     </label>
                 </div>
