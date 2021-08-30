@@ -25,7 +25,7 @@ def create_cabin():
             guests=form.data['guests'],
             beds=form.data['beds'],
             description=form.data['description'],
-            image=form.data['description']
+            image=form.data['image']
         )
         db.session.add(cabin)
         db.session.commit()
