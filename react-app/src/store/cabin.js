@@ -1,33 +1,35 @@
-const LOAD = 'cabin/';
-const ADD = 'cabin/ADD';
-const EDIT = 'cabin/EDIT';
-const DELETE = 'cabin/DELETE';
+const LOAD_CABIN = 'cabin/';
+const ADD_CABIN = 'cabin/addCabin';
+const EDIT_CABIN = 'cabin/editCabin';
+const DELETE_CABIN = 'cabin/deleteCabin';
 
-const loadCabin = cabins => ({
-    type: LOAD,
+const loadCabin = (cabins) => ({
+    type: LOAD_CABIN,
     cabins
 });
 
 const addCabin = (cabin) => ({
-    type: ADD,
+    type: ADD_CABIN,
     cabin
 });
 
 const editCabin = (cabin) => ({
-    type: EDIT,
+    type: EDIT_CABIN,
     cabin
 });
 
 const deleteCabin = (cabin) => ({
-    type: DELETE,
+    type: DELETE_CABIN,
     cabin
 });
 
 
 export const getCabinsThunk = () => async (dispatch) => {
     const res = await fetch(`/api/cabins/`);
-    const cabins = await res.json();
-    dispatch(loadCabin(cabins));
+    if (res.ok) {
+        const cabins = await res.json();
+        dispatch(loadCabin(cabins));
+    }
 };
 
 export const addCabinThunk = payload => async dispatch => {
@@ -75,23 +77,23 @@ export const editCabinsThunk = (id, payload) => async dispatch => {
 const initialState = {}
 const cabinReducer = (state = initialState, action) => {
     switch (action.type) {
-        case LOAD:
+        case LOAD_CABIN:
             const newCabins = {};
             action.cabins.cabins.forEach(cabin => {
                 newCabins[cabin.id] = cabin;
             });
             return newCabins;
-        case ADD:
+        case ADD_CABIN:
             const newState = {
                 ...state,
                 [action.cabin.id]: action.cabin,
             };
             return newState;
-        case DELETE:
+        case DELETE_CABIN:
             const cabinToDelete = { ...state }
             delete cabinToDelete[action.cabin.message]
             return cabinToDelete;
-        case EDIT:
+        case EDIT_CABIN:
             return {
                 ...state,
                 ...action.cabin

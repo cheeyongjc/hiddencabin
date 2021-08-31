@@ -23,7 +23,7 @@ const CabinForm = () => {
 
     const cabinSubmit = async (e) => {
         e.preventDefault();
-        dispatch(addCabinThunk({
+       const data = await dispatch(addCabinThunk({
             hostId: user?.id,
             name,
             price,
