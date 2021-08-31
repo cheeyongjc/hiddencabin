@@ -14,6 +14,7 @@ def cabin():
 
 
 @cabin_routes.route('/', methods=['POST'])
+@login_required
 def create_cabin():
     form = CabinForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -30,7 +31,7 @@ def create_cabin():
         db.session.add(cabin)
         db.session.commit()
         return cabin.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 @cabin_routes.route('/<int:id>', methods=['DELETE'])
@@ -41,14 +42,18 @@ def delete_cabin(id):
     db.session.commit()
     return {'message': id}
 
+
 @cabin_routes.route('/<int:id>', methods=['PATCH'])
+@login_required
 def edit_cabin(id):
-    data = request.json
     cabin = Cabin.query.get(id)
-    cabin.name = data['name'] if data['name'] else cabin.name
-    cabin.price = data['price'] if data['price'] else cabin.price
-    cabin.guests = data['guests'] if data['guests'] else cabin.guests
-    cabin.description = data['description'] if data['description'] else cabin.description
-    cabin.image = data['image'] if data['image'] else cabin.image
-    db.session.commit()
-    return {'message': id}
+    form = CabinForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        cabin.name = form.data['name'] if form.data['name'] else cabin.name
+        cabin.price = form.data['price'] if form.data['price'] else cabin.price
+        cabin.guests = form.data['guests'] if form.data['guests'] else cabin.guests
+        cabin.description = form.data['description'] if form.data['description'] else cabin.description
+        cabin.image = form.data['image'] if form.data['image'] else cabin.image
+        db.session.commit()
+        return {'message': id}

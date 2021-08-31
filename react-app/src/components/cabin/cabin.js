@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
 import { deleteCabinsThunk, editCabinsThunk, getCabinsThunk } from '../../store/cabin.js';
 import { useParams, useHistory } from 'react-router-dom';
 
@@ -28,15 +27,7 @@ function OneCabin(cabin) {
     }
     const cabinUpdate = async (e) => {
         e.preventDefault();
-        await dispatch(editCabinsThunk(id, {
-            hostId: user.Id,
-            name,
-            price,
-            guests,
-            beds,
-            description,
-            image
-        }))
+        await dispatch(editCabinsThunk(id, { hostId: user.Id, name, price, guests, beds, description, image }))
         history.push('/');
     }
     useEffect(() => {
