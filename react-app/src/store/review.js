@@ -1,5 +1,4 @@
 const LOAD_REVIEWS = 'reviews/loadReview'
-const LOAD_ONE_REVIEW = 'reviews/loadOneReview'
 const ADD_REVIEW = 'reviews/addReview'
 const EDIT_REVIEW = 'reviews/editReview'
 const DELETE_REVIEW = 'reviews/deleteReview'
@@ -7,11 +6,6 @@ const DELETE_REVIEW = 'reviews/deleteReview'
 export const loadReviews = (reviews) => ({
     type: LOAD_REVIEWS,
     reviews
-});
-
-export const loadOneReview = (review) => ({
-    type: LOAD_ONE_REVIEW,
-    review
 });
 
 export const addReview = (review) => ({
@@ -38,13 +32,6 @@ export const getReviewsThunk = () => async (dispatch) => {
     }
 };
 
-export const getOneReviewThunk = (id) => async (dispatch) => {
-    const res = await fetch(`/api/cabin/${id}/reviews/${id}`);
-    if (res.ok) {
-        const review = await res.json();
-        dispatch(loadOneReview(review));
-    }
-};
 
 export const addReviewThunk = (payload) => async (dispatch) => {
 
@@ -81,7 +68,7 @@ export const deleteReviewThunk = (id) => async (dispatch) => {
 
 export const editReviewThunk = (id, payload) => async (dispatch) => {
     const res = await fetch(`/api/reviews/${id}`, {
-        method: 'PATCH',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
@@ -106,12 +93,6 @@ const reviewReducer = (state = initialState, action) => {
                 newReviews[review.id] = review;
             });
             return newReviews;
-        case LOAD_ONE_REVIEW:
-            const newReview = {};
-            action.review.review.forEach(rev => {
-                newReview[rev.id] = rev;
-            });
-            return newReview;
         case ADD_REVIEW:
             const newState = {
                 ...state,

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteCabinsThunk, editCabinsThunk, getCabinsThunk } from '../../store/cabin.js';
-import { deleteReviewThunk, editReviewThunk } from '../../store/review.js';
+import { deleteReviewThunk, editReviewThunk, getReviewsThunk } from '../../store/review.js';
 import { useParams, useHistory } from 'react-router-dom';
 import ReviewForm from '../review/reviewForm.js';
-import { getReviewsThunk } from '../../store/review.js';
+
 
 function OneCabin(cabin) {
     const dispatch = useDispatch();
@@ -13,8 +13,8 @@ function OneCabin(cabin) {
     const reviews = useSelector(state => {
         return Object.values(state.reviews);
     });
-
-    const { id } = useParams();
+    const [review, setReview] = useState('');
+    const { id, userId, cabinId } = useParams();
     const [errors, setErrors] = useState([]);
     const [name, setName] = useState('');
     const [price, setPrice] = useState(0);
@@ -23,7 +23,6 @@ function OneCabin(cabin) {
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
 
-    const cabinReviews = reviews.filter(review => review.cabinId === id)
 
 
     const deleteClick = async (e) => {
@@ -32,7 +31,7 @@ function OneCabin(cabin) {
         history.push('/');
         // setTimeout(() => {
         // }, 500);
-    }
+    };
 
     const deleteReviewClick = async (e, id) => {
         e.preventDefault();
@@ -40,20 +39,31 @@ function OneCabin(cabin) {
         window.location.reload();
         // setTimeout(() => {
         // }, 500);
-    }
+    };
 
     const cabinUpdate = async (e) => {
         e.preventDefault();
         await dispatch(editCabinsThunk(id, { hostId: user.Id, name, price, guests, beds, description, image }))
         history.push('/');
-    }
+    };
+
+    const reviewUpdate = async (e) => {
+        e.preventDefault();
+        await dispatch(editReviewThunk(id, userId, cabinId, { review }))
+        window.location.reload();
+    };
+
+    useEffect(() => {
+        dispatch(getReviewsThunk())
+    },[review])
+
     useEffect(() => {
         dispatch(getCabinsThunk());
     }, [name, price, guests, beds, description, image])
 
-    useEffect(() => {
-        dispatch(getReviewsThunk());
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(getReviewsThunk());
+    // }, [dispatch]);
 
     let editDom = (
         <form className='formstyle' onSubmit={cabinUpdate}>
@@ -129,8 +139,32 @@ function OneCabin(cabin) {
                     />
                 </label>
             </div>
-            <button className='addCabinButton' type='submit'>Update Cabin</button>
+            <button className='updateCabinButton' type='submit'>Update Cabin</button>
         </form>
+    )
+    let editReviewDom = (
+        <div className='formStyle reviewUpdateContainer'>
+            <form className='formStyle reviewUpdate' onSubmit={reviewUpdate}>
+                <div className='errorsContainer'>
+                    {errors.map((error, ind) => (
+                        <div key={ind}>{error}</div>
+                    ))}
+                </div>
+
+                <div>
+                    <label>
+                        Review:
+                        <input
+                            type='textarea'
+                            value={review}
+                            onChange={(e) => setReview(e.target.value)}
+                        />
+                    </label>
+                </div>
+
+                <button className='updateReviewButton' type='submit'>update Review</button>
+            </form>
+        </div>
     )
     return (
         <>
@@ -148,7 +182,8 @@ function OneCabin(cabin) {
                                     Review: {review.review}
                                 </div>
                                 <div className='deleteReview'>
-                                    <button onClick={e=>deleteReviewClick(e,review.id)}>Delete Review</button>
+                                    <button onClick={e => deleteReviewClick(e, review.id)}>Delete Review</button>
+                                    {editReviewDom}
                                 </div>
                             </div>
                         )

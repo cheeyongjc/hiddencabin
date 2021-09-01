@@ -43,7 +43,7 @@ def delete_cabin(id):
     return {'message': id}
 
 
-@cabin_routes.route('/<int:id>', methods=['PATCH'])
+@cabin_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def edit_cabin(id):
     cabin = Cabin.query.get(id)
