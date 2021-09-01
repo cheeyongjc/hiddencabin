@@ -32,7 +32,7 @@ export const getCabinsThunk = () => async (dispatch) => {
     }
 };
 
-export const addCabinThunk = payload => async dispatch => {
+export const addCabinThunk = (payload) => async (dispatch) => {
     const res = await fetch(`/api/cabins/`, {
         method: 'POST',
         headers: {
@@ -48,9 +48,9 @@ export const addCabinThunk = payload => async dispatch => {
         let err = await res.json();
         console.log('ERROR', err)
     }
-}
+};
 
-export const deleteCabinsThunk = (id) => async dispatch => {
+export const deleteCabinsThunk = (id) => async (dispatch) => {
     const res = await fetch(`/api/cabins/${id}`, {
         method: 'DELETE',
         headers: {
@@ -60,19 +60,25 @@ export const deleteCabinsThunk = (id) => async dispatch => {
     if (res.ok) {
         dispatch(deleteCabin(id))
     }
-}
+};
 
-export const editCabinsThunk = (id, payload) => async dispatch => {
+export const editCabinsThunk = (id, payload) => async (dispatch) => {
     const res = await fetch(`/api/cabins/${id}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(payload)
-    })
-    const cabin = await res.json();
-    await dispatch(editCabin(cabin))
-}
+    });
+    if (res.oka) {
+        const cabin = await res.json();
+        await dispatch(editCabin(cabin))
+        return cabin;
+    } else {
+        const err = await res.json();
+        console.log('Error', err)
+    }
+};
 
 const initialState = {}
 const cabinReducer = (state = initialState, action) => {
@@ -101,6 +107,6 @@ const cabinReducer = (state = initialState, action) => {
         default:
             return state;
     }
-}
+};
 
 export default cabinReducer;

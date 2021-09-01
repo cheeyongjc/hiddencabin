@@ -2,12 +2,17 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteCabinsThunk, editCabinsThunk, getCabinsThunk } from '../../store/cabin.js';
 import { useParams, useHistory } from 'react-router-dom';
-
+import ReviewForm from '../review/reviewForm.js';
+import { getReviewsThunk } from '../../store/review.js';
 
 function OneCabin(cabin) {
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector(state => state.session.user);
+    const reviews = useSelector(state => {
+        return Object.values(state.reviews);
+    });
+
     const { id } = useParams();
     const [errors, setErrors] = useState([]);
     const [name, setName] = useState('');
@@ -16,6 +21,8 @@ function OneCabin(cabin) {
     const [beds, setBeds] = useState(0);
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
+
+    const cabinReviews = reviews.filter(review => review.cabinId === id)
 
 
     const deleteClick = async (e) => {
@@ -33,6 +40,11 @@ function OneCabin(cabin) {
     useEffect(() => {
         dispatch(getCabinsThunk());
     }, [name, price, guests, beds, description, image])
+
+    useEffect(() => {
+        dispatch(getReviewsThunk());
+    }, [dispatch]);
+
     let editDom = (
         <form className='formstyle' onSubmit={cabinUpdate}>
             <div className='errorsContainer'>
@@ -116,6 +128,25 @@ function OneCabin(cabin) {
                 <button onClick={deleteClick}>Delete</button>
             </div>
             {editDom}
+            {ReviewForm}
+            <div className='reviewList'>
+                {reviews.map(review => {
+                    if (review.cabinId == id) {
+                        return (
+                            <div className='singleReview' key={review.id}>
+                                <div>
+                                    Review: {review.review}
+                                    </div>
+                                    {/* <div>
+                                    CabinId: {review.cabinId}
+                                    </div> */}
+
+
+                            </div>
+                        )
+                    }
+                })}
+            </div>
         </>
     )
 }

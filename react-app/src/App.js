@@ -10,6 +10,7 @@ import Splashpage from './components/splashpage/splashpage';
 import CabinForm from './components/cabin/cabinForm';
 import { authenticate } from './store/session';
 import OneCabin from './components/cabin/cabin';
+import ReviewForm from './components/review/reviewForm';
 // import UsersList from './components/UsersList';
 // import User from './components/User';
 
@@ -61,8 +62,9 @@ function App() {
           <CabinForm />
         </ProtectedRoute>
 
-        <ProtectedRoute path='/cabin/:id' exact={true} >
+        <ProtectedRoute path='/cabins/:id' exact={true} >
           <OneCabin />
+          <ReviewForm />
         </ProtectedRoute>
 
       </Switch>

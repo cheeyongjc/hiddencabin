@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { getUsers } from '../../store/users.js';
-import {addCabinThunk} from '../../store/cabin';
+import { addCabinThunk } from '../../store/cabin';
 import { useHistory } from 'react-router-dom';
 import './cabin.css';
 
@@ -15,15 +15,15 @@ const CabinForm = () => {
     const [guests, setGuests] = useState(0);
     const [beds, setBeds] = useState(0);
     const [description, setDescription] = useState('');
-    const [image, setImage] =useState('');
+    const [image, setImage] = useState('');
 
     useEffect(() => {
         dispatch(getUsers());
     }, [dispatch]);
 
-    const cabinSubmit = async (e) => {
+    const cabinSubmit = (e) => {
         e.preventDefault();
-       const data = await dispatch(addCabinThunk({
+        dispatch(addCabinThunk({
             hostId: user?.id,
             name,
             price,
