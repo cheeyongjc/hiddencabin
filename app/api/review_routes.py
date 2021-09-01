@@ -7,7 +7,7 @@ from .auth_routes import validation_errors_to_error_messages
 review_routes = Blueprint('reviews', __name__)
 
 
-@review_routes.route('/')
+@review_routes.route('')
 def review():
     reviews = Review.query.order_by(Review.id.desc()).all()
     return {'reviews': [review.to_dict() for review in reviews]}

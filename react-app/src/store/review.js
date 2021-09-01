@@ -19,19 +19,19 @@ export const addReview = (review) => ({
     review
 });
 
-// export const editReview = (review) => ({
-//     type: EDIT_REVIEW,
-//     review
-// });
+export const editReview = (review) => ({
+    type: EDIT_REVIEW,
+    review
+});
 
-// export const deleteReview = (review) => ({
-//     type: DELETE_REVIEW,
-//     review
-// });
+export const deleteReview = (review) => ({
+    type: DELETE_REVIEW,
+    review
+});
 
 
 export const getReviewsThunk = () => async (dispatch) => {
-    const res = await fetch(`/api/reviews/`);
+    const res = await fetch(`/api/reviews`);
     if (res.ok) {
         const reviews = await res.json();
         dispatch(loadReviews(reviews));
@@ -67,35 +67,35 @@ export const addReviewThunk = (payload) => async (dispatch) => {
     }
 };
 
-// export const deleteReviewThunk = (id) => async (dispatch) => {
-//     const res = await fetch(`/api/reviews/${id}`, {
-//         method: 'DELETE',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//     });
-//     if (res.ok) {
-//         dispatch(deleteReview(id))
-//     }
-// };
+export const deleteReviewThunk = (id) => async (dispatch) => {
+    const res = await fetch(`/api/reviews/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+    if (res.ok) {
+        dispatch(deleteReview(id))
+    }
+};
 
-// export const editReviewThunk = (id, payload) => async (dispatch) => {
-//     const res = await fetch(`/api/reviews/${id}`, {
-//         method: 'PATCH',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(payload)
-//     });
-//     if (res.ok) {
-//         const review = await res.json();
-//         dispatch(editReview(review));
-//         return review;
-//     } else {
-//         const err = await res.json();
-//         console.log('Error', err)
-//     }
-// };
+export const editReviewThunk = (id, payload) => async (dispatch) => {
+    const res = await fetch(`/api/reviews/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+    });
+    if (res.ok) {
+        const review = await res.json();
+        dispatch(editReview(review));
+        return review;
+    } else {
+        const err = await res.json();
+        console.log('Error', err)
+    }
+};
 
 const initialState = {}
 const reviewReducer = (state = initialState, action) => {
@@ -118,15 +118,15 @@ const reviewReducer = (state = initialState, action) => {
                 [action.review.id]: action.review,
             };
             return newState;
-        // case DELETE_REVIEW:
-        //     const reviewToDelete = { ...state }
-        //     delete reviewToDelete[action.review.message]
-        //     return reviewToDelete;
-        // case EDIT_REVIEW:
-        //     return {
-        //         ...state,
-        //         ...action.cabin
-        //     }
+        case DELETE_REVIEW:
+            const reviewToDelete = { ...state }
+            delete reviewToDelete[action.review.message]
+            return reviewToDelete;
+        case EDIT_REVIEW:
+            return {
+                ...state,
+                ...action.cabin
+            }
         default:
             return state;
     }

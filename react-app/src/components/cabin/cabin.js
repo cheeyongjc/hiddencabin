@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteCabinsThunk, editCabinsThunk, getCabinsThunk } from '../../store/cabin.js';
+import { deleteReviewThunk, editReviewThunk } from '../../store/review.js';
 import { useParams, useHistory } from 'react-router-dom';
 import ReviewForm from '../review/reviewForm.js';
 import { getReviewsThunk } from '../../store/review.js';
@@ -32,6 +33,15 @@ function OneCabin(cabin) {
         // setTimeout(() => {
         // }, 500);
     }
+
+    const deleteReviewClick = async (e, id) => {
+        e.preventDefault();
+        await dispatch(deleteReviewThunk(id));
+        window.location.reload();
+        // setTimeout(() => {
+        // }, 500);
+    }
+
     const cabinUpdate = async (e) => {
         e.preventDefault();
         await dispatch(editCabinsThunk(id, { hostId: user.Id, name, price, guests, beds, description, image }))
@@ -136,17 +146,16 @@ function OneCabin(cabin) {
                             <div className='singleReview' key={review.id}>
                                 <div>
                                     Review: {review.review}
-                                    </div>
-                                    {/* <div>
-                                    CabinId: {review.cabinId}
-                                    </div> */}
-
-
+                                </div>
+                                <div className='deleteReview'>
+                                    <button onClick={e=>deleteReviewClick(e,review.id)}>Delete Review</button>
+                                </div>
                             </div>
                         )
                     }
                 })}
             </div>
+
         </>
     )
 }
