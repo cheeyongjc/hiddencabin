@@ -5,7 +5,6 @@ import { deleteReviewThunk, editReviewThunk, getReviewsThunk } from '../../store
 import { useParams, useHistory } from 'react-router-dom';
 import ReviewForm from '../review/reviewForm.js';
 
-
 function OneCabin(cabin) {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -22,7 +21,6 @@ function OneCabin(cabin) {
     const [beds, setBeds] = useState(0);
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
-
 
 
     const deleteClick = async (e) => {
@@ -55,15 +53,13 @@ function OneCabin(cabin) {
 
     useEffect(() => {
         dispatch(getReviewsThunk())
-    },[review])
+    }, [review])
 
     useEffect(() => {
         dispatch(getCabinsThunk());
     }, [name, price, guests, beds, description, image])
 
-    // useEffect(() => {
-    //     dispatch(getReviewsThunk());
-    // }, [dispatch]);
+
 
     let editDom = (
         <form className='formstyle' onSubmit={cabinUpdate}>
