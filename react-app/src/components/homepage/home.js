@@ -9,7 +9,7 @@ function Home() {
     const cabins = useSelector(state => {
         return Object.values(state.cabins);
     });
-    console.log(cabins);
+
     useEffect(() => {
         dispatch(getCabinsThunk())
     }, [dispatch]);
@@ -22,7 +22,7 @@ function Home() {
                     {cabins.map(cabin => {
                         return (
                             <div className='singleCabin' key={cabin.id}>
-                                <Link to={`cabin/${cabin.id}`}>
+                                <Link to={`cabins/${cabin.id}`}>
                                     <img className='cabinImage' src={cabin.image} alt='cabinImage' />
                                 </Link>
                                 <div>

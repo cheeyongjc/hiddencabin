@@ -13,6 +13,7 @@ class Cabin(db.Model):
     description = db.Column(db.Text, nullable=False)
     image = db.Column(db.String, nullable=False)
 
+
     def to_dict(self):
         return {
             'id': self.id,

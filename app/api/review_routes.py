@@ -9,11 +9,12 @@ review_routes = Blueprint('reviews', __name__)
 
 @review_routes.route('/')
 def review():
-    reviews = Review.query.join(User).order_by(Review.id).all()
+    reviews = Review.query.order_by(Review.id.desc()).all()
     return {'reviews': [review.to_dict() for review in reviews]}
 
 
-@review_routes.route('/')
+@review_routes.route('', methods=['POST'])
+@login_required
 def create_review():
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -45,6 +46,6 @@ def edit_review(id):
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        review.review =form.data['review'] if form.data['review'] else review.review
+        review.review = form.data['review'] if form.data['review'] else review.review
         db.session.commit()
         return {'message': id}
