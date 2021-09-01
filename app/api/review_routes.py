@@ -48,4 +48,4 @@ def edit_review(id):
     if form.validate_on_submit():
         review.review = form.data['review'] if form.data['review'] else review.review
         db.session.commit()
-        return {'message': id}
+        return review.to_dict()

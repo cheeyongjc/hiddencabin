@@ -186,7 +186,6 @@ function OneCabin(cabin) {
                     }
                 })}
             </div>
-
         </>
     )
 }

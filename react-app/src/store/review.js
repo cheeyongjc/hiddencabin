@@ -104,10 +104,11 @@ const reviewReducer = (state = initialState, action) => {
             delete reviewToDelete[action.review.message]
             return reviewToDelete;
         case EDIT_REVIEW:
-            return {
+            const newEditState = {
                 ...state,
-                ...action.cabin
-            }
+                [action.review.id]: action.review,
+            };
+            return newEditState;
         default:
             return state;
     }
