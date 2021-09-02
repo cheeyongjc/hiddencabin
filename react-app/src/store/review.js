@@ -109,6 +109,10 @@ const reviewReducer = (state = initialState, action) => {
                 [action.review.id]: action.review,
             };
             return newEditState;
+            // return {
+            //     ...state,
+            //     ...action.review
+            // }
         default:
             return state;
     }

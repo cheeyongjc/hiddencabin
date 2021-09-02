@@ -5,15 +5,16 @@ import { deleteReviewThunk, editReviewThunk, getReviewsThunk } from '../../store
 import { useParams, useHistory } from 'react-router-dom';
 import ReviewForm from '../review/reviewForm.js';
 
-function OneCabin(cabin) {
+function OneCabin() {
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector(state => state.session.user);
-    const reviews = useSelector(state => {
+    const revs = useSelector(state => {
         return Object.values(state.reviews);
     });
+    const reviews = useSelector(state => state.reviews);
     const [review, setReview] = useState('');
-    const { id, userId, cabinId } = useParams();
+    const { id } = useParams();
     const [errors, setErrors] = useState([]);
     const [name, setName] = useState('');
     const [price, setPrice] = useState(0);
@@ -45,9 +46,9 @@ function OneCabin(cabin) {
         history.push('/');
     };
 
-    const reviewUpdate = async (e) => {
+    const reviewUpdate = async (e, id, userId, cabinId) => {
         e.preventDefault();
-        await dispatch(editReviewThunk(id, userId, cabinId, { review }))
+        await dispatch(editReviewThunk(id, { userId: userId, cabinId: cabinId, review }))
         window.location.reload();
     };
 
@@ -76,7 +77,6 @@ function OneCabin(cabin) {
                         type='text'
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        placeholder={cabin.name}
                     />
                 </label>
             </div>
@@ -140,7 +140,7 @@ function OneCabin(cabin) {
     )
     let editReviewDom = (
         <div className='formStyle reviewUpdateContainer'>
-            <form className='formStyle reviewUpdate' onSubmit={reviewUpdate}>
+            <form className='formStyle reviewUpdate' >
                 <div className='errorsContainer'>
                     {errors.map((error, ind) => (
                         <div key={ind}>{error}</div>
@@ -158,7 +158,7 @@ function OneCabin(cabin) {
                     </label>
                 </div>
 
-                <button className='updateReviewButton' type='submit'>update Review</button>
+
             </form>
         </div>
     )
@@ -170,16 +170,17 @@ function OneCabin(cabin) {
             {editDom}
             {ReviewForm}
             <div className='reviewList'>
-                {reviews.map(review => {
-                    if (review.cabinId == id) {
+                {revs.map(rev => {
+                    if (rev.cabinId == id) {
                         return (
-                            <div className='singleReview' key={review.id}>
+                            <div className='singleReview' key={rev.id}>
                                 <div>
-                                    Review: {review.review}
+                                    Review: {rev.review}
                                 </div>
                                 <div className='deleteReview'>
-                                    <button onClick={e => deleteReviewClick(e, review.id)}>Delete Review</button>
+                                    <button onClick={e => deleteReviewClick(e, rev.id)}>Delete Review</button>
                                     {editReviewDom}
+                                    <button onClick={e => reviewUpdate(e, rev.id, rev.userId, rev.cabinId)}>update Review</button>
                                 </div>
                             </div>
                         )
