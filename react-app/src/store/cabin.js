@@ -64,7 +64,7 @@ export const deleteCabinsThunk = (id) => async (dispatch) => {
 
 export const editCabinsThunk = (id, payload) => async (dispatch) => {
     const res = await fetch(`/api/cabins/${id}`, {
-        method: 'PATCH',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
