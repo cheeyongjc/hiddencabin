@@ -29,7 +29,7 @@ function Home() {
                                     Cabin name: {cabin.name}
                                 </div>
                                 <div>
-                                    Price per night: {cabin.price}
+                                    Price per night: ${cabin.price}
                                 </div>
                                 <div>
                                     Maximum number of guests: {cabin.guests}

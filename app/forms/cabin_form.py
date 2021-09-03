@@ -1,12 +1,14 @@
 from flask_wtf import FlaskForm
-from wtforms import (IntegerField, TextAreaField, StringField)
-from wtforms.validators import DataRequired
+from wtforms import IntegerField, TextAreaField, StringField, validators
+from wtforms.validators import DataRequired, ValidationError
+
+
 
 class CabinForm(FlaskForm):
     hostId = IntegerField('hostId')
-    name = StringField('name', validators=[DataRequired()])
-    price = IntegerField('price', validators=[DataRequired()])
-    guests = IntegerField('guests', validators=[DataRequired()])
-    beds = IntegerField('beds', validators=[DataRequired()])
-    description = TextAreaField('description', validators=[DataRequired()])
-    image = StringField('image', validators=[DataRequired()])
+    name = StringField('name', validators=[DataRequired('Please enter a name for your cabin'), validators.Length(min=3, max=20, message='Name must be between 3 and 20 characters')])
+    price = IntegerField('price', validators=[validators.NumberRange(min=1, max=9999, message='Price per night must be a whole number between 1 and 9999')])
+    guests = IntegerField('guests', validators=[DataRequired('Please enter maximum number of guests'), validators.NumberRange(min=1, max=6, message='Number of guests must be between 1 and 6')])
+    beds = IntegerField('beds', validators=[DataRequired('Please enter how many beds are in your cabin'), validators.NumberRange(min=1, max=6, message='Number of guests must be between 1 and 6')])
+    description = TextAreaField('description', validators=[DataRequired('Please add a description for your cabin'), validators.Length(min=1, max=50, message='Description must be between 1 and 50 characters')])
+    image = StringField('image', validators=[DataRequired(message='Please input a URL to add an image')])
