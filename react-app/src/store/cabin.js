@@ -28,6 +28,9 @@ export const getCabinsThunk = () => async (dispatch) => {
     const res = await fetch(`/api/cabins/`);
     if (res.ok) {
         const cabins = await res.json();
+        if (cabins.errors) {
+            return;
+        }
         dispatch(loadCabin(cabins));
     }
 };
@@ -46,7 +49,9 @@ export const addCabinThunk = (payload) => async (dispatch) => {
         return cabin;
     } else {
         let err = await res.json();
-        console.log('ERROR', err)
+        if (err.errors) {
+            return err.errors;
+        }
     }
 };
 
@@ -70,13 +75,15 @@ export const editCabinsThunk = (id, payload) => async (dispatch) => {
         },
         body: JSON.stringify(payload)
     });
-    if (res.oka) {
+    if (res.ok) {
         const cabin = await res.json();
         await dispatch(editCabin(cabin))
         return cabin;
     } else {
         const err = await res.json();
-        console.log('Error', err)
+        if (err.errors) {
+            return err.errors;
+        }
     }
 };
 

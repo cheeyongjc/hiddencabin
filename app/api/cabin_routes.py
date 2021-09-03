@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from flask_login import login_required
 from app.models import db, Cabin
 from app.forms import CabinForm
@@ -31,7 +31,7 @@ def create_cabin():
         db.session.add(cabin)
         db.session.commit()
         return cabin.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @cabin_routes.route('/<int:id>', methods=['DELETE'])
@@ -57,3 +57,8 @@ def edit_cabin(id):
         cabin.image = form.data['image'] if form.data['image'] else cabin.image
         db.session.commit()
         return {'message': id}
+    errors = form.errors
+    print(errors)
+    return jsonify([f'{field.capitalize()}: {error}'
+                for field in errors
+                for error in errors[field]]),400

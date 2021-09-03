@@ -8,6 +8,7 @@ const rootReducer = combineReducers({
   session,
   cabins: cabinReducer,
   reviews: reviewReducer,
+
 });
 
 

@@ -14,24 +14,26 @@ const ReviewForm = () => {
 
     const reviewSubmit = async (e) => {
         e.preventDefault();
-        dispatch(addReviewThunk({
+        let data = await dispatch(addReviewThunk({
             userId: user.id,
             cabinId: id,
             review
         }))
-        window.location.reload();
+        const dataArray = Object.entries(data)
+        if (data) {
+            // console.log(dataArray, 'so i can see')
+            setErrors(data)
+        }
     }
-
 
     return (
         <div className='formStyle reviewContainer'>
             <form className='formStyle review' onSubmit={reviewSubmit}>
-                <div className='errorsContainer'>
-                    {errors.map((error, ind) => (
-                        <div key={ind}>{error}</div>
-                    ))}
+                <div>
+                    {
+                        !!errors && errors.map((error) => (<div key={error}>{error}</div>))
+                    }
                 </div>
-
                 <div>
                     <label>
                         Review:

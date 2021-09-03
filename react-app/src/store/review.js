@@ -46,11 +46,12 @@ export const addReviewThunk = (payload) => async (dispatch) => {
     if (res.ok) {
         const review = await res.json();
         dispatch(addReview(review));
-        console.log('this is payload for post', payload);
         return review;
-    } else {
+    } else if (res.status < 500) {
         let err = await res.json();
-        console.log('ERROR', err)
+        if (err.errors) {
+            return err.errors;
+        }
     }
 };
 
@@ -80,7 +81,9 @@ export const editReviewThunk = (id, payload) => async (dispatch) => {
         return review;
     } else {
         const err = await res.json();
-        console.log('Error', err)
+        if (err.errors) {
+            return err.errors;
+        }
     }
 };
 
@@ -109,10 +112,10 @@ const reviewReducer = (state = initialState, action) => {
                 [action.review.id]: action.review,
             };
             return newEditState;
-            // return {
-            //     ...state,
-            //     ...action.review
-            // }
+        // return {
+        //     ...state,
+        //     ...action.review
+        // }
         default:
             return state;
     }

@@ -6,4 +6,4 @@ from wtforms.validators import DataRequired
 class ReviewForm(FlaskForm):
     userId = IntegerField('userId')
     cabinId = IntegerField('cabinId')
-    review = TextAreaField('review', validators=[DataRequired()])
+    review = TextAreaField('review', validators=[DataRequired('Please enter a review')])

@@ -42,14 +42,22 @@ function OneCabin() {
 
     const cabinUpdate = async (e) => {
         e.preventDefault();
-        await dispatch(editCabinsThunk(id, { hostId: user.Id, name, price, guests, beds, description, image }))
-        history.push('/');
+        let cab = await dispatch(editCabinsThunk(id, { hostId: user.Id, name, price, guests, beds, description, image }))
+        if (cab) {
+            setErrors(cab)
+        } else {
+            history.push('/');
+        }
     };
 
     const reviewUpdate = async (e, id, userId, cabinId) => {
         e.preventDefault();
-        await dispatch(editReviewThunk(id, { userId: userId, cabinId: cabinId, review }))
-        window.location.reload();
+        let rev = await dispatch(editReviewThunk(id, { userId: userId, cabinId: cabinId, review }))
+        if (rev) {
+            setErrors(rev)
+        } else {
+            window.location.reload();
+        }
     };
 
     useEffect(() => {
@@ -83,7 +91,7 @@ function OneCabin() {
 
             <div>
                 <label>
-                    Price per night:
+                    Price per night: $
                     <input
                         type='integer'
                         value={price}

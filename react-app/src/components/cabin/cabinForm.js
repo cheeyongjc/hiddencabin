@@ -17,14 +17,14 @@ const CabinForm = () => {
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
 
-    useEffect(() => {
-        dispatch(getUsers());
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(getUsers());
+    // }, [dispatch]);
 
-    const cabinSubmit = (e) => {
+    const cabinSubmit = async (e) => {
         e.preventDefault();
-        dispatch(addCabinThunk({
-            hostId: user?.id,
+        let cab = await dispatch(addCabinThunk({
+            hostId: user.id,
             name,
             price,
             guests,
@@ -32,7 +32,13 @@ const CabinForm = () => {
             description,
             image
         }))
-        history.push('/');
+        let cabarray = Object.entries(cab);
+        console.log(cabarray);
+        if (cab) {
+            setErrors(cab)
+        } else {
+            history.push('/');
+        }
     };
     return (
         <div className='formStyle formContainer'>
@@ -43,74 +49,73 @@ const CabinForm = () => {
                         <div key={ind}>{error}</div>
                     ))}
                 </div>
+                    <div>
+                        <label>
+                            Cabin name:
+                            <input
+                                type='text'
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                        </label>
+                    </div>
 
-                <div>
-                    <label>
-                        Cabin name:
-                        <input
-                            type='text'
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                        />
-                    </label>
-                </div>
+                    <div>
+                        <label>
+                            Price per night: $
+                            <input
+                                type='integer'
+                                value={price}
+                                onChange={(e) => setPrice(e.target.value)}
+                            />
+                        </label>
+                    </div>
 
-                <div>
-                    <label>
-                        Price per night:
-                        <input
-                            type='integer'
-                            value={price}
-                            onChange={(e) => setPrice(e.target.value)}
-                        />
-                    </label>
-                </div>
+                    <div>
+                        <label>
+                            Maximum number of guests:
+                            <input
+                                type='integer'
+                                value={guests}
+                                onChange={(e) => setGuests(e.target.value)}
+                            />
+                        </label>
+                    </div>
 
-                <div>
-                    <label>
-                        Maximum number of guests:
-                        <input
-                            type='integer'
-                            value={guests}
-                            onChange={(e) => setGuests(e.target.value)}
-                        />
-                    </label>
-                </div>
+                    <div>
+                        <label>
+                            Number of beds:
+                            <input
+                                type='integer'
+                                value={beds}
+                                onChange={(e) => setBeds(e.target.value)}
+                            />
+                        </label>
+                    </div>
 
-                <div>
-                    <label>
-                        Number of beds:
-                        <input
-                            type='integer'
-                            value={beds}
-                            onChange={(e) => setBeds(e.target.value)}
-                        />
-                    </label>
-                </div>
+                    <div>
+                        <label>
+                            Description:
+                            <input
+                                type='textarea'
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                            />
+                        </label>
+                    </div>
 
-                <div>
-                    <label>
-                        Description:
-                        <input
-                            type='textarea'
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                        />
-                    </label>
-                </div>
+                    <div>
+                        <label>
+                            Image URL:
+                            <input
+                                type='text'
+                                value={image}
+                                onChange={(e) => setImage(e.target.value)}
+                            />
+                        </label>
+                    </div>
 
-                <div>
-                    <label>
-                        Image URL:
-                        <input
-                            type='text'
-                            value={image}
-                            onChange={(e) => setImage(e.target.value)}
-                        />
-                    </label>
-                </div>
-
-                <button className='addCabinButton' type='submit'>Add Cabin</button>
+                    <button className='addCabinButton' type='submit'>Add Cabin</button>
             </form>
         </div>
     )
