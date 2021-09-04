@@ -23,6 +23,7 @@ const ReviewForm = () => {
         if (data) {
             // console.log(dataArray, 'so i can see')
             setErrors(data)
+
         }
     }
 
@@ -31,7 +32,7 @@ const ReviewForm = () => {
             <form className='formStyle review' onSubmit={reviewSubmit}>
                 <div>
                     {
-                        !!errors && errors.map((error) => (<div key={error}>{error}</div>))
+                        errors.map && errors.map((error) => (<div key={error}>{error}</div>))
                     }
                 </div>
                 <div>
