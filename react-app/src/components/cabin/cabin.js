@@ -72,7 +72,7 @@ function OneCabin() {
     let editDom = (
         <form className='formstyle' onSubmit={cabinUpdate}>
             <div className='errorsContainer'>
-                {errors.map((error, ind) => (
+                {errors.map && errors.map((error, ind) => (
                     <div key={ind}>{error}</div>
                 ))}
             </div>
@@ -149,7 +149,7 @@ function OneCabin() {
         <div className='formStyle reviewUpdateContainer'>
             <form className='formStyle reviewUpdate' >
                 <div className='errorsContainer'>
-                    {errors.map((error, ind) => (
+                    {errors.map && errors.map((error, ind) => (
                         <div key={ind}>{error}</div>
                     ))}
                 </div>

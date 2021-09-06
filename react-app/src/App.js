@@ -11,6 +11,7 @@ import CabinForm from './components/cabin/cabinForm';
 import { authenticate } from './store/session';
 import OneCabin from './components/cabin/cabin';
 import ReviewForm from './components/review/reviewForm';
+import EditCabin from './components/cabin/editCabin';
 import Footer from './components/navigation/footer';
 // import UsersList from './components/UsersList';
 // import User from './components/User';
@@ -66,6 +67,10 @@ function App() {
         <Route path='/cabins/:id' exact={true} >
           <OneCabin />
           <ReviewForm />
+        </Route>
+
+        <Route path='/edit/:id' exact={true}>
+        <EditCabin />
         </Route>
 
       </Switch>
