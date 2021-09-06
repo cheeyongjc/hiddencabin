@@ -4,13 +4,14 @@ import { useDispatch } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/navigation/NavBar';
-import ProtectedRoute from './components/auth/ProtectedRoute';
+// import ProtectedRoute from './components/auth/ProtectedRoute';
 import Home from './components/homepage/home';
 import Splashpage from './components/splashpage/splashpage';
 import CabinForm from './components/cabin/cabinForm';
 import { authenticate } from './store/session';
 import OneCabin from './components/cabin/cabin';
 import ReviewForm from './components/review/reviewForm';
+import Footer from './components/navigation/footer';
 // import UsersList from './components/UsersList';
 // import User from './components/User';
 
@@ -54,20 +55,21 @@ function App() {
           <Splashpage />
         </Route>
 
-        <ProtectedRoute path='/' exact={true} >
+        <Route path='/' exact={true} >
           <Home />
-        </ProtectedRoute>
+        </Route>
 
-        <ProtectedRoute path='/createCabin' exact={true} >
+        <Route path='/createCabin' exact={true} >
           <CabinForm />
-        </ProtectedRoute>
+        </Route>
 
-        <ProtectedRoute path='/cabins/:id' exact={true} >
+        <Route path='/cabins/:id' exact={true} >
           <OneCabin />
           <ReviewForm />
-        </ProtectedRoute>
+        </Route>
 
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 }

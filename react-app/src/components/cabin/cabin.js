@@ -23,7 +23,6 @@ function OneCabin() {
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
 
-
     const deleteClick = async (e) => {
         e.preventDefault();
         await dispatch(deleteCabinsThunk(id));
@@ -176,6 +175,7 @@ function OneCabin() {
                 <button onClick={deleteClick}>Delete</button>
             </div>
             {editDom}
+            {}
             {ReviewForm}
             <div className='reviewList'>
                 {revs.map(rev => {
