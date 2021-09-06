@@ -25,11 +25,12 @@ const NavBar = ({ isLoaded }) => {
   } else {
     userSession = (
       <div className='navbar'>
+        <NavLink className='navLinkHome' to='/' exact={true} activeClassName='active'>HiddenCabin</NavLink>
         <NavLink className='navLogin' to='/login' exact={true} activeClassName='active'>Login</NavLink>
         <NavLink className='navSignup' to='/sign-up' exact={true} activeClassName='active'>Sign Up</NavLink>
-        <div className='navDemo'>
+        {/* <div className='navDemo'>
           <Demo />
-        </div>
+        </div> */}
       </div>
     )
   }
