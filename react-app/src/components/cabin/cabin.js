@@ -23,7 +23,6 @@ function OneCabin() {
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
 
-
     const deleteClick = async (e) => {
         e.preventDefault();
         await dispatch(deleteCabinsThunk(id));
@@ -73,7 +72,7 @@ function OneCabin() {
     let editDom = (
         <form className='formstyle' onSubmit={cabinUpdate}>
             <div className='errorsContainer'>
-                {errors.map((error, ind) => (
+                {errors.map && errors.map((error, ind) => (
                     <div key={ind}>{error}</div>
                 ))}
             </div>
@@ -150,7 +149,7 @@ function OneCabin() {
         <div className='formStyle reviewUpdateContainer'>
             <form className='formStyle reviewUpdate' >
                 <div className='errorsContainer'>
-                    {errors.map((error, ind) => (
+                    {errors.map && errors.map((error, ind) => (
                         <div key={ind}>{error}</div>
                     ))}
                 </div>
@@ -176,6 +175,7 @@ function OneCabin() {
                 <button onClick={deleteClick}>Delete</button>
             </div>
             {editDom}
+            {}
             {ReviewForm}
             <div className='reviewList'>
                 {revs.map(rev => {

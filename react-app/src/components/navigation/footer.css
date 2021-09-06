@@ -1,0 +1,23 @@
+
+.footer{
+    display: flex;
+    flex-direction: row;
+    margin-top: 80px;
+    margin-bottom: 0px;
+    height: 15%;
+    width: 90vw;
+}
+.footerList{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    height: 15%;
+    width: 70vw;
+    padding-left: 10vw;
+}
+
+.linkedinlogo{
+    width: 32px;
+    height: 32px;
+    background-size: cover;
+}

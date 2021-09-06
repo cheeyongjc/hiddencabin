@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { getUsers } from '../../store/users.js';
 import { addCabinThunk } from '../../store/cabin';
@@ -45,7 +45,7 @@ const CabinForm = () => {
             <div className='addCabinTitle'><h2>Add a Cabin</h2></div>
             <form className='formstyle' onSubmit={cabinSubmit}>
                 <div className='errorsContainer'>
-                    {errors.map((error, ind) => (
+                    {errors.map && errors.map((error, ind) => (
                         <div key={ind}>{error}</div>
                     ))}
                 </div>
