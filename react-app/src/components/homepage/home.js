@@ -25,21 +25,21 @@ function Home() {
                                 <Link to={`cabins/${cabin.id}`}>
                                     <img className='cabinImage' src={cabin.image} alt='cabinImage' />
                                 </Link>
-                                <div>
+                                <div className='cabinDiv'>
                                     Cabin name: {cabin.name}
                                 </div>
-                                <div>
+                                <div className='cabinDiv'>
                                     Price per night: ${cabin.price}
                                 </div>
-                                <div>
+                                {/* <div className='cabinDiv'>
                                     Maximum number of guests: {cabin.guests}
                                 </div>
-                                <div>
+                                <div className='cabinDiv'>
                                     Number of beds: {cabin.beds}
                                 </div>
-                                <div>
+                                <div className='cabinDiv'>
                                     Description: {cabin.description}
-                                </div>
+                                </div> */}
                             </div>
                         )
                     })}

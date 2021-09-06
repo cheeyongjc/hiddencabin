@@ -38,3 +38,22 @@
     font-size: 30px;
     height: 100%;
 }
+
+.navLogin{
+    grid-column: 17 / 18;
+    grid-row: 1/2;
+    height: 100%;
+    text-decoration: none;
+    font-family: 'Hina Mincho';
+    font-size: 25px;
+    height: 100%;
+}
+.navSignup{
+    grid-column: 18 / 19;
+    grid-row: 1/2;
+    height: 100%;
+    text-decoration: none;
+    font-family: 'Hina Mincho';
+    font-size: 25px;
+    height: 100%;
+}

@@ -1,0 +1,5 @@
+.loginContainer{
+    display:grid;
+    grid-template-columns: repeat(20, 5vw);
+    grid-template-rows: repeat(11, 10vh);
+}

@@ -13,6 +13,7 @@ function OneCabin() {
         return Object.values(state.reviews);
     });
     const reviews = useSelector(state => state.reviews);
+    const cab = useSelector(state => state.cabins)
     const [review, setReview] = useState('');
     const { id } = useParams();
     const [errors, setErrors] = useState([]);
@@ -68,11 +69,10 @@ function OneCabin() {
     }, [name, price, guests, beds, description, image])
 
 
-
     let editDom = (
         <form className='formstyle' onSubmit={cabinUpdate}>
             <div className='errorsContainer'>
-                {errors.map && errors.map((error, ind) => (
+                {errors.map ?? errors.map((error, ind) => (
                     <div key={ind}>{error}</div>
                 ))}
             </div>
@@ -149,7 +149,7 @@ function OneCabin() {
         <div className='formStyle reviewUpdateContainer'>
             <form className='formStyle reviewUpdate' >
                 <div className='errorsContainer'>
-                    {errors.map && errors.map((error, ind) => (
+                    {errors.map ?? errors.map((error, ind) => (
                         <div key={ind}>{error}</div>
                     ))}
                 </div>
@@ -169,34 +169,36 @@ function OneCabin() {
             </form>
         </div>
     )
-    return (
-        <>
-            <div className='deleteCabin'>
-                <button onClick={deleteClick}>Delete</button>
-            </div>
-            {editDom}
-            {}
-            {ReviewForm}
-            <div className='reviewList'>
-                {revs.map(rev => {
-                    if (rev.cabinId == id) {
-                        return (
-                            <div className='singleReview' key={rev.id}>
-                                <div>
-                                    Review: {rev.review}
-                                </div>
-                                <div className='deleteReview'>
-                                    <button onClick={e => deleteReviewClick(e, rev.id)}>Delete Review</button>
-                                    {editReviewDom}
-                                    <button onClick={e => reviewUpdate(e, rev.id, rev.userId, rev.cabinId)}>update Review</button>
-                                </div>
+
+
+return (
+    <>
+        <div className='deleteCabin'>
+            <button onClick={deleteClick}>Delete</button>
+        </div>
+        {editDom}
+
+        {ReviewForm}
+        <div className='reviewList'>
+            {revs.map(rev => {
+                if (rev.cabinId == id) {
+                    return (
+                        <div className='singleReview' key={rev.id}>
+                            <div>
+                                Review: {rev.review}
                             </div>
-                        )
-                    }
-                })}
-            </div>
-        </>
-    )
+                            <div className='deleteReview'>
+                                <button onClick={e => deleteReviewClick(e, rev.id)}>Delete Review</button>
+                                {editReviewDom}
+                                <button onClick={e => reviewUpdate(e, rev.id, rev.userId, rev.cabinId)}>update Review</button>
+                            </div>
+                        </div>
+                    )
+                }
+            })}
+        </div>
+    </>
+)
 }
 
 export default OneCabin;
