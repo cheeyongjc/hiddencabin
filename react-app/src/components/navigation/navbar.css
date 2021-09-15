@@ -18,7 +18,7 @@
     padding: none;
 }
 
-.navLogout{
+/* .navLogout{
     grid-column: 19/20;
     text-decoration: none;
     font-family: 'Hina Mincho';
@@ -27,7 +27,7 @@
     background-color: transparent;
     outline: none;
     border: transparent;
-}
+} */
 
 .navLinkHome{
     grid-column: 2 / 3;
