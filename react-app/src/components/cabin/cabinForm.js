@@ -32,10 +32,9 @@ const CabinForm = () => {
             description,
             image
         }))
-        let cabarray = Object.entries(cab);
-        console.log(cabarray);
         if (cab) {
-            setErrors(cab)
+            setErrors(cab);
+            history.push('/');
         } else {
             history.push('/');
         }
@@ -49,73 +48,73 @@ const CabinForm = () => {
                         <div key={ind}>{error}</div>
                     ))}
                 </div>
-                    <div>
-                        <label>
-                            Cabin name:
-                            <input
-                                type='text'
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                            />
-                        </label>
-                    </div>
+                <div>
+                    <label>
+                        Cabin name:
+                        <input
+                            type='text'
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </label>
+                </div>
 
-                    <div>
-                        <label>
-                            Price per night: $
-                            <input
-                                type='integer'
-                                value={price}
-                                onChange={(e) => setPrice(e.target.value)}
-                            />
-                        </label>
-                    </div>
+                <div>
+                    <label>
+                        Price per night: $
+                        <input
+                            type='integer'
+                            value={price}
+                            onChange={(e) => setPrice(e.target.value)}
+                        />
+                    </label>
+                </div>
 
-                    <div>
-                        <label>
-                            Maximum number of guests:
-                            <input
-                                type='integer'
-                                value={guests}
-                                onChange={(e) => setGuests(e.target.value)}
-                            />
-                        </label>
-                    </div>
+                <div>
+                    <label>
+                        Maximum number of guests:
+                        <input
+                            type='integer'
+                            value={guests}
+                            onChange={(e) => setGuests(e.target.value)}
+                        />
+                    </label>
+                </div>
 
-                    <div>
-                        <label>
-                            Number of beds:
-                            <input
-                                type='integer'
-                                value={beds}
-                                onChange={(e) => setBeds(e.target.value)}
-                            />
-                        </label>
-                    </div>
+                <div>
+                    <label>
+                        Number of beds:
+                        <input
+                            type='integer'
+                            value={beds}
+                            onChange={(e) => setBeds(e.target.value)}
+                        />
+                    </label>
+                </div>
 
-                    <div>
-                        <label>
-                            Description:
-                            <input
-                                type='textarea'
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
-                            />
-                        </label>
-                    </div>
+                <div>
+                    <label>
+                        Description:
+                        <input
+                            type='textarea'
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
+                    </label>
+                </div>
 
-                    <div>
-                        <label>
-                            Image URL:
-                            <input
-                                type='text'
-                                value={image}
-                                onChange={(e) => setImage(e.target.value)}
-                            />
-                        </label>
-                    </div>
+                <div>
+                    <label>
+                        Image URL:
+                        <input
+                            type='text'
+                            value={image}
+                            onChange={(e) => setImage(e.target.value)}
+                        />
+                    </label>
+                </div>
 
-                    <button className='addCabinButton' type='submit'>Add Cabin</button>
+                <button className='addCabinButton' type='submit'>Add Cabin</button>
             </form>
         </div>
     )

@@ -74,7 +74,7 @@ function App() {
         <Route path='/edit/:id' exact={true}>
         <EditCabin />
         </Route>
-
+        
       </Switch>
       <Footer />
     </BrowserRouter>
