@@ -1,21 +1,21 @@
-
-.footer{
-    display: flex;
-    flex-direction: row;
-    margin-top: 80px;
-    margin-bottom: 0px;
-    height: 15%;
-    width: 90vw;
+.footerContainer{
+    display: grid;
+    grid-template-columns: repeat(20, 5vw);
+    grid-template-rows: repeat(5, 2vh);
+    
 }
-.footerList{
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    height: 15%;
-    width: 70vw;
-    padding-left: 10vw;
+.footerName{
+    grid-column: 4 / 6;
+    grid-row: 2 / 4;
 }
-
+.footerLinkedin{
+    grid-column: 10;
+    grid-row: 1 / 4;
+}
+.footerGithub{
+    grid-column: 15;
+    grid-row: 1 / 4;
+}
 .linkedinlogo{
     width: 32px;
     height: 32px;

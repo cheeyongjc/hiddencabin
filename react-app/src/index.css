@@ -2,12 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Hina+Mincho&display=swap');
 
 body {
+  /* display: grid;
 	margin: 0;
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	vertical-align: baseline;
+	vertical-align: baseline; */
   background-color:rgb(99, 99, 167);
+  /* grid-template-columns: repeat(20, 5vw);
+  grid-template-rows: repeat(20, 5vh); */
 }
 
 * a, * Link {

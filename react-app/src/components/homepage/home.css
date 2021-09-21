@@ -1,18 +1,18 @@
 .cabinsContainer{
     display:grid;
     grid-template-columns: repeat(20, 5vw);
-    grid-template-rows: repeat(11, 10vh);
+    grid-template-rows: repeat(20, 10vh);
+    z-index: 0;
 }
-.cabinList{
+ .cabinList{
     display:grid;
     column-gap: 50px;
     row-gap: 50px;
     grid-column: 2 / 5;
-    grid-template-columns: repeat(4, 20vw);
+    grid-template-columns: repeat(4, 19vw);
     width: 100%;
     height: 100%;
 }
-
 
 .cabinImage{
     width: 375px;
