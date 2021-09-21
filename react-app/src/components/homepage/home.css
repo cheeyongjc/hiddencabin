@@ -1,22 +1,36 @@
 .cabinsContainer{
     display:grid;
-    grid-template-columns: repeat(20, 5vw);
-    grid-template-rows: repeat(20, 10vh);
+
+    grid-template-columns: repeat(18, 5vw);
+    grid-template-rows: repeat(20, 5vh);
+    grid-column: 2 /20;
+    grid-row: 2 /19;
     z-index: 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    /* border:solid; */
+    background-color:rgb(108, 99, 167);
 }
+::-webkit-scrollbar {
+    display: none;
+  }
+
  .cabinList{
     display:grid;
-    column-gap: 50px;
-    row-gap: 50px;
-    grid-column: 2 / 5;
-    grid-template-columns: repeat(4, 19vw);
+    column-gap: 11px;
+    row-gap: 25px;
+    grid-template-columns: repeat(5, 18vw);
+    grid-column: 1 / 6;
+    grid-row: 1 / 14;
+    /* grid-template-rows: repeat(15, 5vh); */
     width: 100%;
     height: 100%;
+
 }
 
 .cabinImage{
-    width: 375px;
-    height: 375px;
+    width: 300px;
+    height: 300px;
     object-fit: cover;
 }
 
@@ -25,4 +39,5 @@
     font-weight: 600;
     font-size: 18px;
     font-style: normal;
+    color: #778899;
 }

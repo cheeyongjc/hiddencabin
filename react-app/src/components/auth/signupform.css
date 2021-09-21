@@ -1,0 +1,29 @@
+.signUpContainer{
+    display:grid;
+    grid-template-columns: repeat(6, 5vw);
+    grid-template-rows: repeat(15, 5vh);
+    grid-column: 8 /14;
+    grid-row: 3 /18;
+    /* border:solid; */
+    background-color:rgb(108, 99, 167);
+}
+.signUpForm{
+    display: grid;
+    grid-column: 2 /6;
+    grid-row: 1 /16;
+}
+.signUpDivErrors{
+    color: red;
+}
+.signUpDiv{
+    font-family: 'Hina Mincho';
+    color: #778899;
+}
+.signUpButton{
+    font-family: 'Hina Mincho';
+    background-color: transparent;
+    outline: none;
+    border: transparent;
+    padding: none;
+    color: #778899;
+}

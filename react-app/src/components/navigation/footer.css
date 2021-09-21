@@ -1,20 +1,28 @@
 .footerContainer{
     display: grid;
     grid-template-columns: repeat(20, 5vw);
-    grid-template-rows: repeat(5, 2vh);
-    
+    grid-template-rows: repeat(3, 5vh);
+    grid-column: 1 / 20;
+    grid-row: 19 / 22;
+    overflow:hidden;
 }
 .footerName{
     grid-column: 4 / 6;
-    grid-row: 2 / 4;
+    grid-row: 2;
+    font-family: 'Hina Mincho';
+    color:#20B2AA;
 }
 .footerLinkedin{
     grid-column: 10;
-    grid-row: 1 / 4;
+    grid-row: 2;
+    color:#20B2AA;
+    font-family: 'Hina Mincho';
 }
 .footerGithub{
     grid-column: 15;
-    grid-row: 1 / 4;
+    grid-row: 2;
+    color:#20B2AA;
+    font-family: 'Hina Mincho';
 }
 .linkedinlogo{
     width: 32px;

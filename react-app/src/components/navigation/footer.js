@@ -15,7 +15,8 @@ function Footer() {
 
             </div>
             <div className='footerGithub'>
-                <a target='https://github.com/cheeyongjc/hiddencabin' href='https://github.com/cheeyongjc/hiddencabin'>Github  </a>
+                <a target='https://github.com/cheeyongjc/hiddencabin' href='https://github.com/cheeyongjc/hiddencabin' className='footerGithub'>
+                    Github  </a>
                 <img alt='github' src='https://capstonephotodump.s3.us-east-2.amazonaws.com/capstone/GitHub-Mark-Light-32px.png'>
                 </img>
 
