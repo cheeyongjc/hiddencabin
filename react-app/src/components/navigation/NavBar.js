@@ -16,21 +16,22 @@ const NavBar = ({ isLoaded }) => {
   let userSession;
   if (user) {
     userSession = (
-      <div className='navbar'>
-        <NavLink className='navLinkHome' to='/' exact={true} activeClassName='active'>HiddenCabin</NavLink>
-        <button className='createCabinButton' onClick={handleCreate}>Create Cabin</button>
-        <div className='navLogout'><LogoutButton /></div>
+      <div className='navbarContainer'>
+        <div className='navbar'>
+          <NavLink className='navLinkHome' to='/' exact={true} activeClassName='active'>HiddenCabin</NavLink>
+          <button className='createCabinButton' onClick={handleCreate}>Create Cabin</button>
+          <div className='navLogout'><LogoutButton /></div>
+        </div>
       </div>
     )
   } else {
     userSession = (
-      <div className='navbar'>
-        <NavLink className='navLinkHome' to='/' exact={true} activeClassName='active'>HiddenCabin</NavLink>
-        <NavLink className='navLogin' to='/login' exact={true} activeClassName='active'>Login</NavLink>
-        <NavLink className='navSignup' to='/sign-up' exact={true} activeClassName='active'>Sign Up</NavLink>
-        {/* <div className='navDemo'>
-          <Demo />
-        </div> */}
+      <div className='navbarContainer'>
+        <div className='navbar'>
+          <NavLink className='navLinkHome' to='/' exact={true} activeClassName='active'>HiddenCabin</NavLink>
+          <NavLink className='navLogin' to='/login' exact={true} activeClassName='active'>Login</NavLink>
+          <NavLink className='navSignup' to='/sign-up' exact={true} activeClassName='active'>Sign Up</NavLink>
+        </div>
       </div>
     )
   }

@@ -1,33 +1,39 @@
-.navbar{
-    display:grid;
+.navbarContainer{
+    display: grid;
     grid-template-columns: repeat(20, 5vw);
+    grid-template-rows: repeat(5, 2vh);
+    z-index: 0;
+}
+.navbar{
+    display: grid;
     width: 100%;
     height: 100%;
-    grid-row: 1 / 3;
-    grid-column: 1 / end;
+    grid-column: 1 / 20;
+    grid-row: 1 / 5;
 }
 
 .createCabinButton{
     grid-column: 18/19;
-    text-decoration: none;
+    /* text-decoration: none; */
     font-family: 'Hina Mincho';
-    font-size: 16px;
+    font-size: 20px;
     background-color: transparent;
     outline: none;
     border: transparent;
     padding: none;
+    width: 150px;
 }
 
-/* .navLogout{
-    grid-column: 19/20;
-    text-decoration: none;
+.navLogout{
+    grid-column: 17/18;
+    grid-row: 1/2;
     font-family: 'Hina Mincho';
-    font-size: 16px;
-    background-size: cover;
     background-color: transparent;
     outline: none;
     border: transparent;
-} */
+    padding: none;
+    width: 15px;
+}
 
 .navLinkHome{
     grid-column: 2 / 3;

@@ -23,7 +23,6 @@ const deleteCabin = (cabin) => ({
     cabin
 });
 
-
 export const getCabinsThunk = () => async (dispatch) => {
     const res = await fetch(`/api/cabins/`);
     if (res.ok) {
@@ -54,7 +53,6 @@ export const addCabinThunk = (payload) => async (dispatch) => {
         }
     }
 };
-
 export const deleteCabinsThunk = (id) => async (dispatch) => {
     const res = await fetch(`/api/cabins/${id}`, {
         method: 'DELETE',
@@ -66,7 +64,6 @@ export const deleteCabinsThunk = (id) => async (dispatch) => {
         dispatch(deleteCabin(id))
     }
 };
-
 export const editCabinsThunk = (id, payload) => async (dispatch) => {
     const res = await fetch(`/api/cabins/${id}`, {
         method: 'PUT',
@@ -86,7 +83,6 @@ export const editCabinsThunk = (id, payload) => async (dispatch) => {
         }
     }
 };
-
 const initialState = {}
 const cabinReducer = (state = initialState, action) => {
     switch (action.type) {

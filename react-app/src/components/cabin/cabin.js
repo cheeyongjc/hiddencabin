@@ -13,7 +13,9 @@ function OneCabin() {
         return Object.values(state.reviews);
     });
     const reviews = useSelector(state => state.reviews);
-    const cab = useSelector(state => state.cabins)
+    const cabins = useSelector(state => {
+        return Object.values(state.cabins);
+    });
     const [review, setReview] = useState('');
     const { id } = useParams();
     const [errors, setErrors] = useState([]);
@@ -68,7 +70,7 @@ function OneCabin() {
         dispatch(getCabinsThunk());
     }, [name, price, guests, beds, description, image])
 
-
+    // ********************************************EDIT CABIN ************************************************************************
     let editDom = (
         <form className='formstyle' onSubmit={cabinUpdate}>
             <div className='errorsContainer'>
@@ -145,6 +147,8 @@ function OneCabin() {
             <button className='updateCabinButton' type='submit'>Update Cabin</button>
         </form>
     )
+
+    // ********************************************EDIT REVIEW ************************************************************************
     let editReviewDom = (
         <div className='formStyle reviewUpdateContainer'>
             <form className='formStyle reviewUpdate' >
@@ -169,36 +173,64 @@ function OneCabin() {
             </form>
         </div>
     )
+    // ********************************************RENDER ************************************************************************
 
-
-return (
-    <>
-        <div className='deleteCabin'>
-            <button onClick={deleteClick}>Delete</button>
-        </div>
-        {editDom}
-
-        {ReviewForm}
-        <div className='reviewList'>
-            {revs.map(rev => {
-                if (rev.cabinId == id) {
-                    return (
-                        <div className='singleReview' key={rev.id}>
-                            <div>
-                                Review: {rev.review}
+    return (
+        <div className='oneCabin'>
+            <ul>
+                {cabins.map((cabin) => {
+                    if (cabin?.id === parseInt(id)) {
+                        return (
+                            <div key={cabin.id}>
+                                <img src={cabin.image} alt='cabinImage' />
+                                <div>
+                                    {cabin.name}
+                                </div>
+                                <div>
+                                    {cabin.price}
+                                </div>
+                                <div>
+                                    {cabin.guests}
+                                </div>
+                                <div>
+                                    {cabin.beds}
+                                </div>
+                                <div>
+                                    {cabin.description}
+                                </div>
                             </div>
-                            <div className='deleteReview'>
-                                <button onClick={e => deleteReviewClick(e, rev.id)}>Delete Review</button>
-                                {editReviewDom}
-                                <button onClick={e => reviewUpdate(e, rev.id, rev.userId, rev.cabinId)}>update Review</button>
-                            </div>
-                        </div>
-                    )
-                }
-            })}
+                        )
+                    }
+                })}
+            </ul>
         </div>
-    </>
-)
+        // <>
+        //     <div className='deleteCabin'>
+        //         <button onClick={deleteClick}>Delete</button>
+        //     </div>
+        //     {editDom}
+
+        //     {ReviewForm}
+        //     <div className='reviewList'>
+        //         {revs.map(rev => {
+        //             if (rev.cabinId == id) {
+        //                 return (
+        //                     <div className='singleReview' key={rev.id}>
+        //                         <div>
+        //                             Review: {rev.review}
+        //                         </div>
+        //                         <div className='deleteReview'>
+        //                             <button onClick={e => deleteReviewClick(e, rev.id)}>Delete Review</button>
+        //                             {editReviewDom}
+        //                             <button onClick={e => reviewUpdate(e, rev.id, rev.userId, rev.cabinId)}>update Review</button>
+        //                         </div>
+        //                     </div>
+        //                 )
+        //             }
+        //         })}
+        //     </div>
+        // </>
+    )
 }
 
 export default OneCabin;

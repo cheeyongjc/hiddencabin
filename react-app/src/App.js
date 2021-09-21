@@ -35,7 +35,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+    <NavBar />
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />
@@ -59,7 +59,9 @@ function App() {
         </Route>
 
         <Route path='/' exact={true} >
+
           <Home />
+
         </Route>
 
         <Route path='/createCabin' exact={true} >
@@ -72,7 +74,7 @@ function App() {
         </Route>
 
         <Route path='/edit/:id' exact={true}>
-        <EditCabin />
+          <EditCabin />
         </Route>
 
       </Switch>

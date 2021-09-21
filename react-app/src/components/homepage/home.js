@@ -17,7 +17,6 @@ function Home() {
     return (
         <>
             <div className='cabinsContainer'>
-
                 <div className='cabinList'>
                     {cabins.map(cabin => {
                         return (
