@@ -68,8 +68,8 @@
     padding: 0px;
     margin: 0px;
     color:#20B2AA;
-    grid-column: 2 / 4;
-    grid-row: 11 / 12;
     text-align: left;
     font-size: 20px;
+    grid-column: 2 / 4;
+    grid-row: 11 / 12;
 }

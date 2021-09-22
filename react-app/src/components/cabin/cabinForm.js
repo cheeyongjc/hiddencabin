@@ -43,7 +43,6 @@ const CabinForm = () => {
 
     return (
         <div className='cabinFormContainer'>
-            <div className='addCabinTitle'><h2>Add a Cabin</h2></div>
             <form onSubmit={cabinSubmit} className='cabinForm'>
                 <div className='cabinFormErrors'>
                     {errors.map && errors.map((error, ind) => (
