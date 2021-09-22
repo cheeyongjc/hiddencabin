@@ -1,5 +1,48 @@
-/* .loginContainer{
+.loginContainer{
     display:grid;
-    grid-template-columns: repeat(20, 5vw);
-    grid-template-rows: repeat(11, 10vh);
-} */
+    grid-template-columns: repeat(18, 5vw);
+    grid-template-rows: repeat(18, 5vh);
+    grid-column: 2 /20;
+    grid-row: 2 /19;
+    /* border:solid; */
+    background-image: url(cabinpic3.jpg);
+    background-color:rgb(108, 99, 167);
+    background-size: cover;
+
+}
+.loginForm{
+    display:grid;
+    grid-template-columns: repeat(4, 5vw);
+    grid-template-rows: repeat(13, 5vh);
+    grid-column: 8 / 12;
+    grid-row: 5 / 15;
+    background-color:rgba(108, 99, 167, 0.918);
+}
+.loginDivErrors{
+    color: red;
+    grid-column: 2 / 4;
+}
+.loginEmailDiv{
+    font-family: 'Hina Mincho';
+    color:#20B2AA;
+    grid-column: 2 / 3;
+    grid-row: 5 / 7;
+}.loginPasswordDiv{
+    font-family: 'Hina Mincho';
+    color:#20B2AA;
+    grid-column: 2 / 3;
+    grid-row: 6 / 7;
+}
+.loginButton{
+    font-family: 'Hina Mincho';
+    background-color: transparent;
+    outline: none;
+    border: none;
+    padding: 0px;
+    margin: 0px;
+    color:#20B2AA;
+    grid-column: 2 / 3;
+    grid-row: 8 / 9;
+    font-size: 20px;
+    text-align: left;
+}
