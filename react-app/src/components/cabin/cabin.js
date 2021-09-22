@@ -4,6 +4,7 @@ import { deleteCabinsThunk, editCabinsThunk, getCabinsThunk } from '../../store/
 import { deleteReviewThunk, editReviewThunk, getReviewsThunk } from '../../store/review.js';
 import { useParams, useHistory } from 'react-router-dom';
 import ReviewForm from '../review/reviewForm.js';
+import './cabin.css';
 
 function OneCabin() {
     const dispatch = useDispatch();
@@ -176,33 +177,35 @@ function OneCabin() {
     // ********************************************RENDER ************************************************************************
 
     return (
-        <div className='oneCabin'>
-            <ul>
-                {cabins.map((cabin) => {
-                    if (cabin?.id === parseInt(id)) {
-                        return (
-                            <div key={cabin.id}>
-                                <img src={cabin.image} alt='cabinImage' />
-                                <div>
-                                    {cabin.name}
+        <div className='oneCabinContainer'>
+            <div className='oneCabin'>
+                <ul>
+                    {cabins.map((cabin) => {
+                        if (cabin?.id === parseInt(id)) {
+                            return (
+                                <div key={cabin.id} className='oneCabinImage'>
+                                    <img src={cabin.image} alt='cabinImage' />
+                                    <div className='oneCabinDiv'>
+                                        Cabin name: {cabin.name}
+                                    </div>
+                                    <div className='oneCabinDiv'>
+                                        Price per night: ${cabin.price}
+                                    </div>
+                                    <div className='oneCabinDiv'>
+                                        Maximum number of guests allowed: {cabin.guests}
+                                    </div>
+                                    <div className='oneCabinDiv'>
+                                        Number of beds: {cabin.beds}
+                                    </div>
+                                    <div className='oneCabinDiv'>
+                                        Description: {cabin.description}
+                                    </div>
                                 </div>
-                                <div>
-                                    {cabin.price}
-                                </div>
-                                <div>
-                                    {cabin.guests}
-                                </div>
-                                <div>
-                                    {cabin.beds}
-                                </div>
-                                <div>
-                                    {cabin.description}
-                                </div>
-                            </div>
-                        )
-                    }
-                })}
-            </ul>
+                            )
+                        }
+                    })}
+                </ul>
+            </div>
         </div>
         // <>
         //     <div className='deleteCabin'>

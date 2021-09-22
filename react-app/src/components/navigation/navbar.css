@@ -1,20 +1,32 @@
+/* .navbarContainer{
+    display: grid;
+    /* grid-template-columns: repeat(20, 5vw);
+    grid-template-rows: repeat(5, 2vh);
+    grid-column: 1 / 20;
+    grid-row: 1 / 5;
+} */
 .navbarContainer{
     display: grid;
     grid-template-columns: repeat(20, 5vw);
-    grid-template-rows: repeat(5, 2vh);
-    z-index: 0;
+    grid-template-rows: repeat(3, 5vh);
+    grid-column: 1/20;
+    grid-row: 1/3;
+    overflow: hidden;
 }
-.navbar{
-    display: grid;
-    width: 100%;
+.navLinkHome{
+    grid-column: 2/3;
+    grid-row: 1/2;
     height: 100%;
-    grid-column: 1 / 20;
-    grid-row: 1 / 5;
+    text-decoration: none;
+    font-family: 'Hina Mincho';
+    font-size: 30px;
+    height: 100%;
+    color:#20B2AA;
 }
 
-.createCabinButton{
-    grid-column: 18/19;
-    /* text-decoration: none; */
+ .createCabinButton{
+    grid-column: 17/18;
+    grid-row: 1/2;
     font-family: 'Hina Mincho';
     font-size: 20px;
     background-color: transparent;
@@ -22,10 +34,11 @@
     border: transparent;
     padding: none;
     width: 150px;
+    color:#20B2AA;
 }
 
 .navLogout{
-    grid-column: 17/18;
+    grid-column: 19/19;
     grid-row: 1/2;
     font-family: 'Hina Mincho';
     background-color: transparent;
@@ -35,31 +48,23 @@
     width: 15px;
 }
 
-.navLinkHome{
-    grid-column: 2 / 3;
-    grid-row: 1/2;
-    height: 100%;
-    text-decoration: none;
-    font-family: 'Hina Mincho';
-    font-size: 30px;
-    height: 100%;
-}
-
 .navLogin{
-    grid-column: 17 / 18;
+    grid-column: 19/19;
     grid-row: 1/2;
     height: 100%;
     text-decoration: none;
     font-family: 'Hina Mincho';
     font-size: 25px;
     height: 100%;
+    color:#20B2AA;
 }
 .navSignup{
-    grid-column: 18 / 19;
+    grid-column: 17/18;
     grid-row: 1/2;
     height: 100%;
     text-decoration: none;
     font-family: 'Hina Mincho';
     font-size: 25px;
     height: 100%;
+    color:#20B2AA;
 }
