@@ -4,7 +4,7 @@ import { deleteCabinsThunk, editCabinsThunk, getCabinsThunk } from '../../store/
 import { deleteReviewThunk, editReviewThunk, getReviewsThunk } from '../../store/review.js';
 import { useParams, useHistory } from 'react-router-dom';
 import ReviewForm from '../review/reviewForm.js';
-import './cabin.css';
+
 
 function OneCabin() {
     const dispatch = useDispatch();

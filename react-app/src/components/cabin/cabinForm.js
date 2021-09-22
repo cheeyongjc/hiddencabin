@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { getUsers } from '../../store/users.js';
 import { addCabinThunk } from '../../store/cabin';
-import { useHistory } from 'react-router-dom';
-import './cabin.css';
+import { useHistory, Redirect } from 'react-router-dom';
+import './cabinForm.css';
 
 const CabinForm = () => {
     const dispatch = useDispatch();
@@ -34,21 +34,23 @@ const CabinForm = () => {
         }))
         if (cab) {
             setErrors(cab);
-            history.push('/');
-        } else {
-            history.push('/');
         }
     };
+
+    if (!errors.map) {
+        return <Redirect to='/' />;
+    }
+
     return (
-        <div className='formStyle formContainer'>
+        <div className='cabinFormContainer'>
             <div className='addCabinTitle'><h2>Add a Cabin</h2></div>
-            <form className='formstyle' onSubmit={cabinSubmit}>
-                <div className='errorsContainer'>
+            <form onSubmit={cabinSubmit} className='cabinForm'>
+                <div className='cabinFormErrors'>
                     {errors.map && errors.map((error, ind) => (
                         <div key={ind}>{error}</div>
                     ))}
                 </div>
-                <div>
+                <div className='cabinFormDiv cabinNameDiv'>
                     <label>
                         Cabin name:
                         <input
@@ -59,7 +61,7 @@ const CabinForm = () => {
                     </label>
                 </div>
 
-                <div>
+                <div className='cabinFormDiv cabinPriceDiv'>
                     <label>
                         Price per night: $
                         <input
@@ -70,7 +72,7 @@ const CabinForm = () => {
                     </label>
                 </div>
 
-                <div>
+                <div className='cabinFormDiv cabinGuestsDiv'>
                     <label>
                         Maximum number of guests:
                         <input
@@ -81,7 +83,7 @@ const CabinForm = () => {
                     </label>
                 </div>
 
-                <div>
+                <div className='cabinFormDiv cabinBedsDiv'>
                     <label>
                         Number of beds:
                         <input
@@ -92,7 +94,7 @@ const CabinForm = () => {
                     </label>
                 </div>
 
-                <div>
+                <div className='cabinFormDiv cabinDescriptionDiv'>
                     <label>
                         Description:
                         <input
@@ -103,7 +105,7 @@ const CabinForm = () => {
                     </label>
                 </div>
 
-                <div>
+                <div className='cabinFormDiv cabinImageDiv'>
                     <label>
                         Image URL:
                         <input
