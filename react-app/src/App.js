@@ -59,9 +59,7 @@ function App() {
         </Route>
 
         <Route path='/' exact={true} >
-
           <Home />
-
         </Route>
 
         <Route path='/createCabin' exact={true} >
@@ -73,7 +71,7 @@ function App() {
           <ReviewForm />
         </Route>
 
-        <Route path='/edit/:id' exact={true}>
+        <Route path='/cabins/edit/:id' exact={true}>
           <EditCabin />
         </Route>
 

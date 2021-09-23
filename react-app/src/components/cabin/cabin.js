@@ -1,22 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteCabinsThunk, editCabinsThunk, getCabinsThunk } from '../../store/cabin.js';
+import { deleteCabinsThunk, editCabinsThunk, getCabinsThunk, getOneCabinThunk } from '../../store/cabin.js';
 import { deleteReviewThunk, editReviewThunk, getReviewsThunk } from '../../store/review.js';
 import { useParams, useHistory } from 'react-router-dom';
 import ReviewForm from '../review/reviewForm.js';
-
+import './cabin.css';
 
 function OneCabin() {
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector(state => state.session.user);
-    const revs = useSelector(state => {
-        return Object.values(state.reviews);
-    });
-    const reviews = useSelector(state => state.reviews);
-    const cabins = useSelector(state => {
-        return Object.values(state.cabins);
-    });
+    const oneCabin = useSelector(state => state.cabins);
     const [review, setReview] = useState('');
     const { id } = useParams();
     const [errors, setErrors] = useState([]);
@@ -62,18 +56,21 @@ function OneCabin() {
             window.location.reload();
         }
     };
+    useEffect(() => {
+        dispatch(getOneCabinThunk(id))
+    }, [dispatch, name, price, guests, beds, description, image])
 
     useEffect(() => {
         dispatch(getReviewsThunk())
     }, [review])
 
-    useEffect(() => {
-        dispatch(getCabinsThunk());
-    }, [name, price, guests, beds, description, image])
+    // useEffect(() => {
+    //     dispatch(getCabinsThunk());
+    // }, [name, price, guests, beds, description, image])
 
     // ********************************************EDIT CABIN ************************************************************************
     let editDom = (
-        <form className='formstyle' onSubmit={cabinUpdate}>
+        <form className='editCabinForm' onSubmit={cabinUpdate}>
             <div className='errorsContainer'>
                 {errors.map ?? errors.map((error, ind) => (
                     <div key={ind}>{error}</div>
@@ -151,8 +148,8 @@ function OneCabin() {
 
     // ********************************************EDIT REVIEW ************************************************************************
     let editReviewDom = (
-        <div className='formStyle reviewUpdateContainer'>
-            <form className='formStyle reviewUpdate' >
+        <div className='reviewUpdateContainer'>
+            <form className='reviewUpdateForm' >
                 <div className='errorsContainer'>
                     {errors.map ?? errors.map((error, ind) => (
                         <div key={ind}>{error}</div>
@@ -178,35 +175,49 @@ function OneCabin() {
 
     return (
         <div className='oneCabinContainer'>
-            <div className='oneCabin'>
-                <ul>
-                    {cabins.map((cabin) => {
-                        if (cabin?.id === parseInt(id)) {
-                            return (
-                                <div key={cabin.id} className='oneCabinImage'>
-                                    <img src={cabin.image} alt='cabinImage' />
-                                    <div className='oneCabinDiv'>
-                                        Cabin name: {cabin.name}
-                                    </div>
-                                    <div className='oneCabinDiv'>
-                                        Price per night: ${cabin.price}
-                                    </div>
-                                    <div className='oneCabinDiv'>
-                                        Maximum number of guests allowed: {cabin.guests}
-                                    </div>
-                                    <div className='oneCabinDiv'>
-                                        Number of beds: {cabin.beds}
-                                    </div>
-                                    <div className='oneCabinDiv'>
-                                        Description: {cabin.description}
-                                    </div>
-                                </div>
-                            )
-                        }
-                    })}
-                </ul>
+            <img src={oneCabin?.oneCabin?.image} className='oneCabinImage' alt='oneCabinImage' />
+            <div className='oneCabinName oneCabinDiv'>
+                Cabin Name: {oneCabin?.oneCabin?.name}
+            </div>
+            <div className='oneCabinPrice oneCabinDiv'>
+                Price per night: ${oneCabin?.oneCabin?.price}
+            </div>
+            <div className='oneCabinGuests oneCabinDiv'>
+                Maximum number of guests: {oneCabin?.oneCabin?.guests}
+            </div>
+            <div className='oneCabinBeds oneCabinDiv'>
+                Number of beds: {oneCabin?.oneCabin?.beds}
+            </div>
+            <div className='oneCabinDescription oneCabinDiv'>
+                Description: {oneCabin?.oneCabin?.description}
             </div>
         </div>
+        // <ul className='oneCabinContainer'>
+        //     {cabins.map((cabin) => {
+        //         if (cabin?.id === parseInt(id)) {
+        //             return (
+        //                 <div key={cabin.id} className='oneCabinImage'>
+        //                     <img src={cabin.image} alt='cabinImage' />
+        //                     <div className='oneCabinDiv oneCabinName'>
+        //                         Cabin name: {cabin.name}
+        //                     </div>
+        //                     <div className='oneCabinDiv oneCabinPrice'>
+        //                         Price per night: ${cabin.price}
+        //                     </div>
+        //                     <div className='oneCabinDiv oneCabinGuests'>
+        //                         Maximum number of guests allowed: {cabin.guests}
+        //                     </div>
+        //                     <div className='oneCabinDiv oneCabinBeds'>
+        //                         Number of beds: {cabin.beds}
+        //                     </div>
+        //                     <div className='oneCabinDiv oneCabinDescription'>
+        //                         Description: {cabin.description}
+        //                     </div>
+        //                 </div>
+        //             )
+        //         }
+        //     })}
+        // </ul>
         // <>
         //     <div className='deleteCabin'>
         //         <button onClick={deleteClick}>Delete</button>

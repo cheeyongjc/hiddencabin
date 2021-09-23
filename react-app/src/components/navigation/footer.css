@@ -9,8 +9,12 @@
 .footerName{
     grid-column: 4 / 6;
     grid-row: 2;
+    margin: 0px;
+    padding: 0px;
     font-family: 'Hina Mincho';
     color:#20B2AA;
+    align-items: baseline;
+
 }
 .footerLinkedin{
     grid-column: 10;
