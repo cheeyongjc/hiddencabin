@@ -9,8 +9,7 @@
     background-color:rgb(108, 99, 167);
     background-size: cover;
 }
-.addCabinTitle{
-}
+
 .cabinForm{
     display: grid;
     grid-template-columns: repeat(4, 5vw);

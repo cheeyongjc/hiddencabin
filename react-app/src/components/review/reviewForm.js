@@ -28,8 +28,8 @@ const ReviewForm = () => {
     }
 
     return (
-        <div className='formStyle reviewContainer'>
-            <form className='formStyle review' onSubmit={reviewSubmit}>
+        <div className='reviewContainer'>
+            <form className='reviewForm' onSubmit={reviewSubmit}>
                 <div>
                     {
                         errors.map && errors.map((error) => (<div key={error}>{error}</div>))

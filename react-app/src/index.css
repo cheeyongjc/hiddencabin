@@ -27,5 +27,5 @@ a:visited {
   display: grid;
   width: 100%;
   grid-template-columns: repeat(20, 5vw);
-  grid-template-rows: repeat(23, 5vh);
+  grid-template-rows: repeat(20, 5vh);
 }
