@@ -12,11 +12,6 @@ def allcabins():
     cabins = Cabin.query.all()
     return {'cabins': [cabin.to_dict() for cabin in cabins]}
 
-@cabin_routes.route('/<int:id>', methods=['GET'])
-def onecabin(id):
-    cabin = Cabin.query.get(id)
-    return cabin.to_dict()
-
 @cabin_routes.route('/', methods=['POST'])
 @login_required
 def create_cabin():

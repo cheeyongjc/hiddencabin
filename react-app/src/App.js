@@ -68,7 +68,7 @@ function App() {
 
         <Route path='/cabins/:id' exact={true} >
           <OneCabin />
-          <ReviewForm />
+          {/* <ReviewForm /> */}
         </Route>
 
         <Route path='/cabins/edit/:id' exact={true}>

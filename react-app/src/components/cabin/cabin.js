@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteCabinsThunk, editCabinsThunk, getCabinsThunk, getOneCabinThunk } from '../../store/cabin.js';
+import { deleteCabinsThunk, editCabinsThunk, getCabinsThunk} from '../../store/cabin.js';
 import { deleteReviewThunk, editReviewThunk, getReviewsThunk } from '../../store/review.js';
 import { useParams, useHistory } from 'react-router-dom';
 import ReviewForm from '../review/reviewForm.js';
 import './cabin.css';
 
 function OneCabin() {
+    const { id } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector(state => state.session.user);
@@ -16,9 +17,8 @@ function OneCabin() {
     const revs = useSelector(state => {
         return Object.values(state.reviews);
     });
-    const oneCabin = useSelector(state => state.cabins);
+    const oneCabin = cabins.filter((cabin) => cabin.id === +id);
     const [review, setReview] = useState('');
-    const { id } = useParams();
     const [errors, setErrors] = useState([]);
     const [name, setName] = useState('');
     const [price, setPrice] = useState(0);
@@ -61,12 +61,11 @@ function OneCabin() {
     }
     useEffect(() => {
         dispatch(getReviewsThunk())
-    }, [review])
+    }, [dispatch, review])
 
     useEffect(() => {
         dispatch(getCabinsThunk(id))
-    }, [name, price, guests, beds, description, image])
-
+    }, [dispatch, name, price, guests, beds, description, image])
 
 
     let editDom = (
@@ -175,86 +174,41 @@ function OneCabin() {
 
     return (
         <>
-            {/* <div className='oneCabinContainer'>
-                <img src={oneCabin?.oneCabin?.image} className='oneCabinImage' alt='oneCabinImage' />
-                <div className='oneCabinName oneCabinDiv'>
-                    Cabin Name: {oneCabin?.oneCabin?.name}
-                </div>
+        <div className='editDeleteContainer'>
+            {
+                oneCabin[0]?.hostId === user?.id ?
+                    <>
+                            <button className='editCabinButton editDeleteButton' onClick={handleEdit}>Edit</button>
+                            <button className='deleteCabinButton editDeleteButton' onClick={deleteClick}>Delete</button>
+                    </>
+                    :
+                    null
+            }
+            </div>
+            <div className='oneCabinImageContainer'>
+                <img src={oneCabin[0]?.image} alt='cabinImage' className='oneCabinImage' />
+            </div>
+
+            <div className='oneCabinContainer'>
+
+                <h1 className='oneCabinName oneCabinDiv'>
+                    {oneCabin[0]?.name}
+                </h1>
                 <div className='oneCabinPrice oneCabinDiv'>
-                    Price per night: ${oneCabin?.oneCabin?.price}
+                    Price per night: ${oneCabin[0]?.price}
                 </div>
                 <div className='oneCabinGuests oneCabinDiv'>
-                    Maximum number of guests: {oneCabin?.oneCabin?.guests}
+                    Maximum number of guests: {oneCabin[0]?.guests}
                 </div>
                 <div className='oneCabinBeds oneCabinDiv'>
-                    Number of beds: {oneCabin?.oneCabin?.beds}
+                    Number of beds: {oneCabin[0]?.beds}
                 </div>
                 <div className='oneCabinDescription oneCabinDiv'>
-                    Description: {oneCabin?.oneCabin?.description}
+                    Description: {oneCabin[0]?.description}
                 </div>
-            </div> */}
-            {/* {
-                user?.id === oneCabin.id.hostId ?
-                    <div>
-                        <div>
-                            <button className='editCabinButton' onClick={handleEdit}>Edit</button>
-                        </div>
-                        <div>
-                            <button onClick={deleteClick}>Delete</button>
-                        </div>
-                    </div>
-                    : null
-            } */}
-            <div>
-                {cabins.map((cabin)=>{
-                    if(cabin?.id === parseInt(id) && user?.id === cabin.hostId){
-                        return (
-                            <div key={cabin.id}>
-                        <div>
-                            <button className='editCabinButton' onClick={handleEdit}>Edit</button>
-                        </div>
-                        <div>
-                            <button onClick={deleteClick}>Delete</button>
-                        </div>
-                    </div>
-                        )
-                    }
-                })}
+
             </div>
-        {/* </> */}
-        {/* // <> */}
-            <ul className='oneCabinContainer'>
-                {cabins.map((cabin) => {
-                    if (cabin?.id === parseInt(id)) {
-                        return (
-                            <div key={cabin.id} className='oneCabinImage'>
-                                <img src={cabin.image} alt='cabinImage' />
-                                <div className='oneCabinDiv oneCabinName'>
-                                    Cabin name: {cabin.name}
-                                </div>
-                                <div className='oneCabinDiv oneCabinPrice'>
-                                    Price per night: ${cabin.price}
-                                </div>
-                                <div className='oneCabinDiv oneCabinGuests'>
-                                    Maximum number of guests allowed: {cabin.guests}
-                                </div>
-                                <div className='oneCabinDiv oneCabinBeds'>
-                                    Number of beds: {cabin.beds}
-                                </div>
-                                <div className='oneCabinDiv oneCabinDescription'>
-                                    Description: {cabin.description}
-                                </div>
-                            </div>
-                        )
-                    }
-                })}
-            </ul>
-            </>
-        //     <>
-        //         <div className='deleteCabin'>
-        //             <button onClick={deleteClick}>Delete</button>
-        //         </div>
-        //         {editDom}
+        </>
 
         //         {ReviewForm}
         //         <div className='reviewList'>
