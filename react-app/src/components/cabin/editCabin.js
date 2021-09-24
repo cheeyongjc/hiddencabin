@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react'
 import { useHistory, useParams, Link } from 'react-router-dom';
-import { getOneCabinThunk, editCabinsThunk } from '../../store/cabin';
+import { getCabinsThunk, editCabinsThunk } from '../../store/cabin';
 import { Redirect } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -21,8 +21,8 @@ function EditCabin() {
     const { id } = useParams();
 
     useEffect(() => {
-        dispatch(getOneCabinThunk(id))
-    }, [dispatch, name, price, guests, beds, description, image])
+        dispatch(getCabinsThunk(id))
+    }, [name, price, guests, beds, description, image])
 
     const handleSubmit = async (e) => {
         e.preventDefault();

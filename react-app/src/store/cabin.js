@@ -82,7 +82,7 @@ export const deleteCabinsThunk = (id) => async (dispatch) => {
     }
 };
 export const editCabinsThunk = (id, payload) => async (dispatch) => {
-    const res = await fetch(`/api/cabins/${id}`, {
+    const res = await fetch(`/api/cabins/edit/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -113,7 +113,7 @@ const cabinReducer = (state = initialState, action) => {
         case LOAD_ONE_CABIN:
             return{
                 ...state,
-                oneCabin: action.cabin
+                ...action.cabin
             }
         case ADD_CABIN:
             const newState = {
@@ -123,7 +123,7 @@ const cabinReducer = (state = initialState, action) => {
             return newState;
         case DELETE_CABIN:
             const cabinToDelete = { ...state }
-            delete cabinToDelete[action.cabin.message]
+            delete cabinToDelete[action.cabin]
             return cabinToDelete;
         case EDIT_CABIN:
             return {
