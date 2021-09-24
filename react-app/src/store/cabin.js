@@ -1,5 +1,4 @@
 const LOAD_CABIN = 'cabin/';
-const LOAD_ONE_CABIN = 'cabin/loadOneCabin';
 const ADD_CABIN = 'cabin/addCabin';
 const EDIT_CABIN = 'cabin/editCabin';
 const DELETE_CABIN = 'cabin/deleteCabin';
@@ -7,11 +6,6 @@ const DELETE_CABIN = 'cabin/deleteCabin';
 const loadCabin = (cabins) => ({
     type: LOAD_CABIN,
     cabins
-});
-
-const loadOneCabin = (cabin) => ({
-    type: LOAD_ONE_CABIN,
-    cabin
 });
 
 const addCabin = (cabin) => ({
@@ -37,17 +31,6 @@ export const getCabinsThunk = () => async (dispatch) => {
             return;
         }
         dispatch(loadCabin(cabins));
-    }
-};
-
-export const getOneCabinThunk = (id) => async (dispatch) => {
-    const res = await fetch(`/api/cabins/${id}`)
-    if(res.ok){
-        const oneCabin = await res.json();
-        if(oneCabin.errors){
-            return;
-        }
-        dispatch(loadOneCabin(oneCabin));
     }
 };
 
@@ -82,7 +65,7 @@ export const deleteCabinsThunk = (id) => async (dispatch) => {
     }
 };
 export const editCabinsThunk = (id, payload) => async (dispatch) => {
-    const res = await fetch(`/api/cabins/${id}`, {
+    const res = await fetch(`/api/cabins/edit/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -101,7 +84,6 @@ export const editCabinsThunk = (id, payload) => async (dispatch) => {
     }
 };
 const initialState = {}
-const oneCabin = {}
 const cabinReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_CABIN:
@@ -110,11 +92,6 @@ const cabinReducer = (state = initialState, action) => {
                 newCabins[cabin.id] = cabin;
             });
             return newCabins;
-        case LOAD_ONE_CABIN:
-            return{
-                ...state,
-                oneCabin: action.cabin
-            }
         case ADD_CABIN:
             const newState = {
                 ...state,
@@ -123,7 +100,7 @@ const cabinReducer = (state = initialState, action) => {
             return newState;
         case DELETE_CABIN:
             const cabinToDelete = { ...state }
-            delete cabinToDelete[action.cabin.message]
+            delete cabinToDelete[action.cabin]
             return cabinToDelete;
         case EDIT_CABIN:
             return {

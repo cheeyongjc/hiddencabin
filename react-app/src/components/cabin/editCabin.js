@@ -1,29 +1,30 @@
 import React from 'react';
 import { useState, useEffect } from 'react'
 import { useHistory, useParams, Link } from 'react-router-dom';
-import { getOneCabinThunk, editCabinsThunk } from '../../store/cabin';
-import { Redirect } from 'react-router';
+import { getCabinsThunk, editCabinsThunk } from '../../store/cabin';
 import { useSelector, useDispatch } from 'react-redux'
-
+import './editCabin.css';
 
 function EditCabin() {
-    const user = useSelector(state => state.session.user);
+    const { id } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
+    const user = useSelector(state => state.session.user);
+    const cabins = useSelector(state => {
+        return Object.values(state.cabins)
+    });
+    const oneCabin = cabins.filter((cabin) => cabin.id === +id);
     const [errors, setErrors] = useState([]);
-    const [name, setName] = useState('');
-    const [price, setPrice] = useState(0);
-    const [guests, setGuests] = useState(0);
-    const [beds, setBeds] = useState(0);
-    const [description, setDescription] = useState('');
-    const [image, setImage] = useState('');
-
-    const { id } = useParams();
+    const [name, setName] = useState(oneCabin[0]?.name);
+    const [price, setPrice] = useState(oneCabin[0]?.price);
+    const [guests, setGuests] = useState(oneCabin[0]?.guests);
+    const [beds, setBeds] = useState(oneCabin[0]?.beds);
+    const [description, setDescription] = useState(oneCabin[0]?.description);
+    const [image, setImage] = useState(oneCabin[0]?.image);
 
     useEffect(() => {
-        dispatch(getOneCabinThunk(id))
-    }, [dispatch, name, price, guests, beds, description, image])
-
+        dispatch(getCabinsThunk(id))
+    }, [name, price, guests, beds, description, image])
     const handleSubmit = async (e) => {
         e.preventDefault();
 
