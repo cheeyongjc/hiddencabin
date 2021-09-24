@@ -10,6 +10,12 @@ function OneCabin() {
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector(state => state.session.user);
+    const cabins = useSelector(state => {
+        return Object.values(state.cabins);
+    });
+    const revs = useSelector(state => {
+        return Object.values(state.reviews);
+    });
     const oneCabin = useSelector(state => state.cabins);
     const [review, setReview] = useState('');
     const { id } = useParams();
@@ -20,7 +26,6 @@ function OneCabin() {
     const [beds, setBeds] = useState(0);
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
-
     const deleteClick = async (e) => {
         e.preventDefault();
         await dispatch(deleteCabinsThunk(id));
@@ -37,13 +42,11 @@ function OneCabin() {
         // }, 500);
     };
 
-    const cabinUpdate = async (e) => {
+    const cabinUpdate = async (e, id) => {
         e.preventDefault();
         let cab = await dispatch(editCabinsThunk(id, { hostId: user.Id, name, price, guests, beds, description, image }))
         if (cab) {
             setErrors(cab)
-        } else {
-            history.push('/');
         }
     };
 
@@ -52,10 +55,11 @@ function OneCabin() {
         let rev = await dispatch(editReviewThunk(id, { userId: userId, cabinId: cabinId, review }))
         if (rev) {
             setErrors(rev)
-        } else {
-            window.location.reload();
         }
     };
+    const handleEdit = (e) => {
+        history.push(`/cabins/edit/${id}`);
+    }
     useEffect(() => {
         dispatch(getOneCabinThunk(id))
     }, [dispatch, name, price, guests, beds, description, image])
@@ -64,11 +68,6 @@ function OneCabin() {
         dispatch(getReviewsThunk())
     }, [review])
 
-    // useEffect(() => {
-    //     dispatch(getCabinsThunk());
-    // }, [name, price, guests, beds, description, image])
-
-    // ********************************************EDIT CABIN ************************************************************************
     let editDom = (
         <form className='editCabinForm' onSubmit={cabinUpdate}>
             <div className='errorsContainer'>
@@ -174,75 +173,91 @@ function OneCabin() {
     // ********************************************RENDER ************************************************************************
 
     return (
-        <div className='oneCabinContainer'>
-            <img src={oneCabin?.oneCabin?.image} className='oneCabinImage' alt='oneCabinImage' />
-            <div className='oneCabinName oneCabinDiv'>
-                Cabin Name: {oneCabin?.oneCabin?.name}
+        <>
+            <div className='oneCabinContainer'>
+                <img src={oneCabin?.oneCabin?.image} className='oneCabinImage' alt='oneCabinImage' />
+                <div className='oneCabinName oneCabinDiv'>
+                    Cabin Name: {oneCabin?.oneCabin?.name}
+                </div>
+                <div className='oneCabinPrice oneCabinDiv'>
+                    Price per night: ${oneCabin?.oneCabin?.price}
+                </div>
+                <div className='oneCabinGuests oneCabinDiv'>
+                    Maximum number of guests: {oneCabin?.oneCabin?.guests}
+                </div>
+                <div className='oneCabinBeds oneCabinDiv'>
+                    Number of beds: {oneCabin?.oneCabin?.beds}
+                </div>
+                <div className='oneCabinDescription oneCabinDiv'>
+                    Description: {oneCabin?.oneCabin?.description}
+                </div>
             </div>
-            <div className='oneCabinPrice oneCabinDiv'>
-                Price per night: ${oneCabin?.oneCabin?.price}
-            </div>
-            <div className='oneCabinGuests oneCabinDiv'>
-                Maximum number of guests: {oneCabin?.oneCabin?.guests}
-            </div>
-            <div className='oneCabinBeds oneCabinDiv'>
-                Number of beds: {oneCabin?.oneCabin?.beds}
-            </div>
-            <div className='oneCabinDescription oneCabinDiv'>
-                Description: {oneCabin?.oneCabin?.description}
-            </div>
-        </div>
-        // <ul className='oneCabinContainer'>
-        //     {cabins.map((cabin) => {
-        //         if (cabin?.id === parseInt(id)) {
-        //             return (
-        //                 <div key={cabin.id} className='oneCabinImage'>
-        //                     <img src={cabin.image} alt='cabinImage' />
-        //                     <div className='oneCabinDiv oneCabinName'>
-        //                         Cabin name: {cabin.name}
-        //                     </div>
-        //                     <div className='oneCabinDiv oneCabinPrice'>
-        //                         Price per night: ${cabin.price}
-        //                     </div>
-        //                     <div className='oneCabinDiv oneCabinGuests'>
-        //                         Maximum number of guests allowed: {cabin.guests}
-        //                     </div>
-        //                     <div className='oneCabinDiv oneCabinBeds'>
-        //                         Number of beds: {cabin.beds}
-        //                     </div>
-        //                     <div className='oneCabinDiv oneCabinDescription'>
-        //                         Description: {cabin.description}
-        //                     </div>
-        //                 </div>
-        //             )
-        //         }
-        //     })}
-        // </ul>
+            {
+                user?.id === oneCabin?.oneCabin?.hostId ?
+                    <div>
+                        <div>
+                            <button className='editCabinButton' onClick={handleEdit}>Edit</button>
+                        </div>
+                        <div>
+                            <button onClick={deleteClick}>Delete</button>
+                        </div>
+                    </div>
+                    : null
+            }
+        </>
         // <>
-        //     <div className='deleteCabin'>
-        //         <button onClick={deleteClick}>Delete</button>
-        //     </div>
-        //     {editDom}
-
-        //     {ReviewForm}
-        //     <div className='reviewList'>
-        //         {revs.map(rev => {
-        //             if (rev.cabinId == id) {
+        //     <ul className='oneCabinContainer'>
+        //         {cabins.map((cabin) => {
+        //             if (cabin?.id === parseInt(id)) {
         //                 return (
-        //                     <div className='singleReview' key={rev.id}>
-        //                         <div>
-        //                             Review: {rev.review}
+        //                     <div key={cabin.id} className='oneCabinImage'>
+        //                         <img src={cabin.image} alt='cabinImage' />
+        //                         <div className='oneCabinDiv oneCabinName'>
+        //                             Cabin name: {cabin.name}
         //                         </div>
-        //                         <div className='deleteReview'>
-        //                             <button onClick={e => deleteReviewClick(e, rev.id)}>Delete Review</button>
-        //                             {editReviewDom}
-        //                             <button onClick={e => reviewUpdate(e, rev.id, rev.userId, rev.cabinId)}>update Review</button>
+        //                         <div className='oneCabinDiv oneCabinPrice'>
+        //                             Price per night: ${cabin.price}
+        //                         </div>
+        //                         <div className='oneCabinDiv oneCabinGuests'>
+        //                             Maximum number of guests allowed: {cabin.guests}
+        //                         </div>
+        //                         <div className='oneCabinDiv oneCabinBeds'>
+        //                             Number of beds: {cabin.beds}
+        //                         </div>
+        //                         <div className='oneCabinDiv oneCabinDescription'>
+        //                             Description: {cabin.description}
         //                         </div>
         //                     </div>
         //                 )
         //             }
         //         })}
-        //     </div>
+        //     </ul>
+        //     <>
+        //         <div className='deleteCabin'>
+        //             <button onClick={deleteClick}>Delete</button>
+        //         </div>
+        //         {editDom}
+
+        //         {ReviewForm}
+        //         <div className='reviewList'>
+        //             {revs.map(rev => {
+        //                 if (rev.cabinId == id) {
+        //                     return (
+        //                         <div className='singleReview' key={rev.id}>
+        //                             <div>
+        //                                 Review: {rev.review}
+        //                             </div>
+        //                             <div className='deleteReview'>
+        //                                 <button onClick={e => deleteReviewClick(e, rev.id)}>Delete Review</button>
+        //                                 {editReviewDom}
+        //                                 <button onClick={e => reviewUpdate(e, rev.id, rev.userId, rev.cabinId)}>update Review</button>
+        //                             </div>
+        //                         </div>
+        //                     )
+        //                 }
+        //             })}
+        //         </div>
+        //     </>
         // </>
     )
 }

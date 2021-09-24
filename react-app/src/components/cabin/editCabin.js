@@ -1,15 +1,12 @@
 import React from 'react';
 import { useState, useEffect } from 'react'
 import { useHistory, useParams, Link } from 'react-router-dom';
-import { getCabinsThunk, editCabinsThunk } from '../../store/cabin';
+import { getOneCabinThunk, editCabinsThunk } from '../../store/cabin';
 import { Redirect } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux'
 
 
 function EditCabin() {
-    const cabins = useSelector(state => state.cabins)
-    const cabinsArray = Object.values(cabins);
-    const currentCabin = cabinsArray.filter((cabin) => cabin.id === Number(id))
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
     const history = useHistory();
@@ -22,9 +19,10 @@ function EditCabin() {
     const [image, setImage] = useState('');
 
     const { id } = useParams();
+
     useEffect(() => {
-        dispatchEvent(getCabinsThunk)
-    });
+        dispatch(getOneCabinThunk(id))
+    }, [dispatch, name, price, guests, beds, description, image])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -32,9 +30,10 @@ function EditCabin() {
         const cabinSubmit = await dispatch(editCabinsThunk(id, { hostId: user.Id, name, price, guests, beds, description, image }))
         if(cabinSubmit){
             setErrors(cabinSubmit)
-        }else{
-            history.push(`/`)
         }
+    }
+    if (!errors.map) {
+        history.push(`/cabins/${id}`);
     }
     return (
         <div className='editCabinContainer'>
