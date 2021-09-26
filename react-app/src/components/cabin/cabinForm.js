@@ -23,15 +23,7 @@ const CabinForm = () => {
 
     const cabinSubmit = async (e) => {
         e.preventDefault();
-        let cab = await dispatch(addCabinThunk({
-            hostId: user.id,
-            name,
-            price,
-            guests,
-            beds,
-            description,
-            image
-        }))
+        let cab = await dispatch(addCabinThunk({hostId: user.id,name,price,guests,beds, description,image}))
         if (cab) {
             setErrors(cab);
         }

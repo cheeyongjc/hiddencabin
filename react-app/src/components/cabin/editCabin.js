@@ -29,7 +29,7 @@ function EditCabin() {
         e.preventDefault();
 
         const cabinSubmit = await dispatch(editCabinsThunk(id, { hostId: user.Id, name, price, guests, beds, description, image }))
-        if(cabinSubmit){
+        if (cabinSubmit) {
             setErrors(cabinSubmit)
         }
     }
@@ -37,83 +37,90 @@ function EditCabin() {
         history.push(`/cabins/${id}`);
     }
     return (
-        <div className='editCabinContainer'>
-        <form className='editCabinForm' onSubmit={handleSubmit}>
-            <div className='editCabinErrorsContainer'>
-                {errors.map && errors.map((error, ind) => (
-                    <div key={ind}>{error}</div>
-                ))}
-            </div>
-
-            <div className='editCabinDiv'>
-                <label>
-                    Cabin name:
-                    <input
-                        type='text'
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                </label>
-            </div>
-
-            <div className='editCabinDiv'>
-                <label>
-                    Price per night: $
-                    <input
-                        type='integer'
-                        value={price}
-                        onChange={(e) => setPrice(e.target.value)}
-                    />
-                </label>
-            </div>
-
-            <div className='editCabinDiv'>
-                <label>
-                    Maximum number of guests:
-                    <input
-                        type='integer'
-                        value={guests}
-                        onChange={(e) => setGuests(e.target.value)}
-                    />
-                </label>
-            </div>
-
-            <div className='editCabinDiv'>
-                <label>
-                    Number of beds:
-                    <input
-                        type='integer'
-                        value={beds}
-                        onChange={(e) => setBeds(e.target.value)}
-                    />
-                </label>
-            </div>
-
-            <div className='editCabinDiv'>
-                <label>
-                    Description:
-                    <input
-                        type='textarea'
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
-                </label>
-            </div>
-
-            <div className='editCabinDiv'>
-                <label>
-                    Image URL:
-                    <input
-                        type='text'
-                        value={image}
-                        onChange={(e) => setImage(e.target.value)}
-                    />
-                </label>
-            </div>
-            <button className='updateCabinButton' type='submit'>Update Cabin</button>
-        </form>
+        <>
+        <div className='oneCabinImageContainer'>
+        <img src={oneCabin[0]?.image} alt='cabinImage' className='oneCabinImage' />
         </div>
+            <div className='editCabinContainer'>
+                <form className='editCabinForm' onSubmit={handleSubmit}>
+                    <div className='editCabinErrors'>
+                        {errors.map && errors.map((error, ind) => (
+                            <div key={ind}>{error}</div>
+                        ))}
+                    </div>
+
+                    <div className='editCabinDiv editCabinName'>
+                        <label>
+                            Cabin name:
+                            <input
+                                type='text'
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                        </label>
+                    </div>
+
+                    <div className='editCabinDiv editCabinPrice'>
+                        <label>
+                            Price per night: $
+                            <input
+                                type='integer'
+                                value={price}
+                                onChange={(e) => setPrice(e.target.value)}
+                            />
+                        </label>
+                    </div>
+
+                    <div className='editCabinDiv editCabinGuests'>
+                        <label>
+                            Maximum number of guests:
+                            <input
+                                type='integer'
+                                value={guests}
+                                onChange={(e) => setGuests(e.target.value)}
+                            />
+                        </label>
+                    </div>
+
+                    <div className='editCabinDiv editCabinBeds'>
+                        <label>
+                            Number of beds:
+                            <input
+                                type='integer'
+                                value={beds}
+                                onChange={(e) => setBeds(e.target.value)}
+                            />
+                        </label>
+                    </div>
+
+                    <div className='editCabinDiv editCabinDescription'>
+                        <label>
+                            Description:
+                            <input
+                                type='textarea'
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                            />
+                        </label>
+                    </div>
+
+                    <div className='editCabinDiv editCabinImage'>
+                        <label>
+                            Image URL:
+                            <input
+                                type='text'
+                                value={image}
+                                onChange={(e) => setImage(e.target.value)}
+                            />
+                        </label>
+                    </div>
+                    <button className='updateCabinButton' type='submit'>Update Cabin</button>
+                </form>
+            </div>
+        </>
     )
+
+
 }
 
 export default EditCabin;
