@@ -56,8 +56,4 @@ def edit_cabin(id):
         cabin.image = form.data['image'] if form.data['image'] else cabin.image
         db.session.commit()
         return {'message': id}
-    errors = form.errors
-    print(errors)
-    return jsonify([f'{field.capitalize()}: {error}'
-                for field in errors
-                for error in errors[field]]),400
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401

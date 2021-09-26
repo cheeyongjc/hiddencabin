@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteCabinsThunk, editCabinsThunk, getCabinsThunk} from '../../store/cabin.js';
+import { deleteCabinsThunk, editCabinsThunk, getCabinsThunk } from '../../store/cabin.js';
 import { deleteReviewThunk, editReviewThunk, getReviewsThunk } from '../../store/review.js';
 import { useParams, useHistory } from 'react-router-dom';
 import ReviewForm from '../review/reviewForm.js';
@@ -58,6 +58,9 @@ function OneCabin() {
     };
     const handleEdit = (e) => {
         history.push(`/cabins/edit/${id}`);
+    }
+    const handleReviewEdit = (e) => {
+        history.push(`/cabins/review/edit/${id}`);
     }
     useEffect(() => {
         dispatch(getReviewsThunk())
@@ -174,16 +177,16 @@ function OneCabin() {
 
     return (
         <>
-        <div className='editDeleteContainer'>
-            {
-                oneCabin[0]?.hostId === user?.id ?
-                    <>
+            <div className='editDeleteContainer'>
+                {
+                    oneCabin[0]?.hostId === user?.id ?
+                        <>
                             <button className='editCabinButton editDeleteButton' onClick={handleEdit}>Edit</button>
                             <button className='deleteCabinButton editDeleteButton' onClick={deleteClick}>Delete</button>
-                    </>
-                    :
-                    null
-            }
+                        </>
+                        :
+                        null
+                }
             </div>
             <div className='oneCabinImageContainer'>
                 <img src={oneCabin[0]?.image} alt='cabinImage' className='oneCabinImage' />
@@ -206,6 +209,22 @@ function OneCabin() {
                 <div className='oneCabinDescription oneCabinDiv'>
                     Description: {oneCabin[0]?.description}
                 </div>
+
+            </div>
+
+            <div className='reviewList'>
+                {revs.map(review => {
+                    if (review.cabinId === parseInt(id) && review.userId === user.id){
+                        return (
+                            <div className='singleReview' key={review.id}>
+                                <div className='reviewDiv'>
+                                    {review.review}
+                                </div>
+                            </div>
+                        )
+                    }
+
+                })}
 
             </div>
         </>
