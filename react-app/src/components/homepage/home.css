@@ -1,6 +1,5 @@
 .cabinsContainer{
     display:grid;
-
     grid-template-columns: repeat(18, 5vw);
     /* grid-template-rows: repeat(20, 5vh); */
     grid-template-rows: repeat(auto-fill, 5vh);

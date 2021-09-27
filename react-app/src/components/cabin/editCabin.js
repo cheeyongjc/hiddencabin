@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react'
-import { useHistory, useParams, Link } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { getCabinsThunk, editCabinsThunk } from '../../store/cabin';
 import { useSelector, useDispatch } from 'react-redux'
 import './editCabin.css';
@@ -25,6 +25,7 @@ function EditCabin() {
     useEffect(() => {
         dispatch(getCabinsThunk(id))
     }, [name, price, guests, beds, description, image])
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -32,6 +33,9 @@ function EditCabin() {
         if (cabinSubmit) {
             setErrors(cabinSubmit)
         }
+    }
+    const cancelUpdate = async (e) =>{
+        history.push(`/cabins/${id}`);
     }
     if (!errors.map) {
         history.push(`/cabins/${id}`);
@@ -116,6 +120,7 @@ function EditCabin() {
                     </div>
                     <button className='updateCabinButton' type='submit'>Update Cabin</button>
                 </form>
+                <button className='cancelUpdateCabinButton' onClick={cancelUpdate}>Cancel</button>
             </div>
         </>
     )

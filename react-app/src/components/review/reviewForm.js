@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom';
-import { addReviewThunk } from '../../store/review';
+import { addReviewThunk, getReviewsThunk } from '../../store/review';
 
 const ReviewForm = () => {
     const { id } = useParams();
@@ -14,21 +14,23 @@ const ReviewForm = () => {
 
     const reviewSubmit = async (e) => {
         e.preventDefault();
-        let data = await dispatch(addReviewThunk({
-            userId: user.id,
-            cabinId: id,
-            review
-        }))
-        const dataArray = Object.entries(data)
-        if (data) {
-            // console.log(dataArray, 'so i can see')
-            setErrors(data)
-
-        }
+            let data = await dispatch(addReviewThunk({
+                userId: user.id,
+                cabinId: id,
+                review
+            }))
+            const dataArray = Object.entries(data)
+            if (data) {
+                // console.log(dataArray, 'so i can see')
+                setErrors(data)
+            }
     }
+    useEffect(() => {
+        dispatch(getReviewsThunk())
+    }, [dispatch, review])
 
     return (
-        <div className='reviewContainer'>
+        <div className='reviewFormContainer'>
             <form className='reviewForm' onSubmit={reviewSubmit}>
                 <div>
                     {

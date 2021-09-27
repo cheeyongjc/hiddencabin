@@ -24,6 +24,17 @@
     grid-column: 3 / 9;
     grid-row: 14/ 14;
 }
+.reviewListContainer{
+    display: grid;
+    grid-template-columns: 30vw;
+    grid-template-rows: repeat(autofill, 1vh);
+    grid-column: 11 / 17;
+    grid-row: 6 / 15;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color:rgba(108, 99, 167, 0.89);
+    row-gap: 10px;
+}
 .oneCabinImage{
     grid-column: 1 /19;
     grid-row: 1 / 18;
@@ -80,4 +91,11 @@
     grid-column: 4 / 5;
     grid-row: 1 /2;
     z-index: 5;
+}
+.reviewDiv{
+    font-family: 'Hina Mincho';
+    font-weight: 600;
+    font-size: 20px;
+    font-style: normal;
+    color: #778899;
 }
