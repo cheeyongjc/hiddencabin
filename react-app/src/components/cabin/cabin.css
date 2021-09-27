@@ -26,14 +26,38 @@
 }
 .reviewListContainer{
     display: grid;
-    grid-template-columns: 30vw;
-    grid-template-rows: repeat(autofill, 1vh);
-    grid-column: 11 / 17;
-    grid-row: 6 / 15;
+    grid-template-columns: repeat(7, 5vw);
+    grid-template-rows: repeat(auto-fill, 5vh);
+    grid-column: 10 / 17;
+    grid-row: 3 / 13;
     overflow-y: scroll;
     overflow-x: hidden;
     background-color:rgba(108, 99, 167, 0.89);
-    row-gap: 10px;
+}
+.reviewList{
+    display:grid;
+    grid-template-rows: repeat(auto-fill, auto);
+    row-gap: 3vh;
+    grid-column: 2 / 7;
+    grid-row-start: 3;
+}
+.reviewHeading{
+    font-family: 'Hina Mincho';
+    font-weight: 600;
+    font-size: 40px;
+    font-style: normal;
+    color: #778899;
+    grid-column-start: 2;
+    grid-row: 1 / 2;
+    width: 300px;
+}
+.reviewDiv{
+    font-family: 'Hina Mincho';
+    font-weight: 600;
+    font-size: 20px;
+    font-style: normal;
+    color: #778899;
+    width: 100%;
 }
 .oneCabinImage{
     grid-column: 1 /19;
@@ -92,10 +116,14 @@
     grid-row: 1 /2;
     z-index: 5;
 }
-.reviewDiv{
+.editDeleteReviewButton{
     font-family: 'Hina Mincho';
     font-weight: 600;
     font-size: 20px;
     font-style: normal;
     color: #778899;
+    background-color: transparent;
+    outline: none;
+    border: transparent;
+    padding: none;
 }

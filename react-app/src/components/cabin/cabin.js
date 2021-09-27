@@ -33,13 +33,6 @@ function OneCabin() {
         // setTimeout(() => {
         // }, 500);
     };
-    const deleteReviewClick = async (e, id) => {
-        e.preventDefault();
-        await dispatch(deleteReviewThunk(id));
-        window.location.reload();
-        // setTimeout(() => {
-        // }, 500);
-    };
 
     const cabinUpdate = async (e, id) => {
         e.preventDefault();
@@ -63,8 +56,8 @@ function OneCabin() {
         history.push(`/cabins/review/edit/${id}`);
     }
     useEffect(() => {
-        dispatch(getReviewsThunk())
-    }, [dispatch, review])
+        dispatch(getReviewsThunk(id))
+    }, [dispatch, review, id])
 
     useEffect(() => {
         dispatch(getCabinsThunk(id))
@@ -213,16 +206,29 @@ function OneCabin() {
             </div>
 
             <div className='reviewListContainer'>
-                {revs.map(review => {
-                    if (review.cabinId === parseInt(id) && review.userId === user?.id) {
-                        return (
-                            <div key={review.id} className='reviewDiv'>
-                                {review.review}
-                            </div>
-                        )
-                    }
-
-                })}
+                <h1 className='reviewHeading'> Reviews</h1>
+                <div className='reviewList'>
+                    {revs.map(review => {
+                        if (review.cabinId === parseInt(id) && review.userId === user.id) {
+                            const deleteReviewClick = async () => {
+                                await dispatch(deleteReviewThunk(review.id));
+                            };
+                            return (
+                                <div key={review.id} className='reviewDiv'>
+                                    {review.review}
+                                    <button className='editReviewButton editDeleteReviewButton' onClick={handleReviewEdit}>Edit</button>
+                                    <button className='deleteReviewButton editDeleteReviewButton' onClick={deleteReviewClick}>Delete</button>
+                                </div>
+                            )
+                        } else if (review.cabinId === parseInt(id)) {
+                            return (
+                                <div key={review.id} className='reviewDiv'>
+                                    {review.review}
+                                </div>
+                            )
+                        }
+                    })}
+                </div>
             </div>
         </>
 

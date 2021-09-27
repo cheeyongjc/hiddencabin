@@ -104,7 +104,7 @@ const reviewReducer = (state = initialState, action) => {
             return newState;
         case DELETE_REVIEW:
             const reviewToDelete = { ...state }
-            delete reviewToDelete[action.review.message]
+            delete reviewToDelete[action.review]
             return reviewToDelete;
         case EDIT_REVIEW:
             const newEditState = {
