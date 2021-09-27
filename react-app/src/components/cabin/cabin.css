@@ -116,3 +116,14 @@
     grid-row: 1 /2;
     z-index: 5;
 }
+.editDeleteReviewButton{
+    font-family: 'Hina Mincho';
+    font-weight: 600;
+    font-size: 20px;
+    font-style: normal;
+    color: #778899;
+    background-color: transparent;
+    outline: none;
+    border: transparent;
+    padding: none;
+}

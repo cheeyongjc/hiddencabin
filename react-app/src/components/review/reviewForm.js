@@ -27,8 +27,8 @@ const ReviewForm = () => {
         }
     }
     useEffect(() => {
-        dispatch(getReviewsThunk())
-    }, [dispatch, review])
+        dispatch(getReviewsThunk(id))
+    }, [dispatch, review, id])
 
     return (
         <div className='reviewFormContainer'>
