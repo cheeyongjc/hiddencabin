@@ -212,20 +212,17 @@ function OneCabin() {
 
             </div>
 
-            <div className='reviewList'>
+            <div className='reviewListContainer'>
                 {revs.map(review => {
-                    if (review.cabinId === parseInt(id) && review.userId === user.id){
+                    if (review.cabinId === parseInt(id) && review.userId === user?.id) {
                         return (
-                            <div className='singleReview' key={review.id}>
-                                <div className='reviewDiv'>
-                                    {review.review}
-                                </div>
+                            <div key={review.id} className='reviewDiv'>
+                                {review.review}
                             </div>
                         )
                     }
 
                 })}
-
             </div>
         </>
 
