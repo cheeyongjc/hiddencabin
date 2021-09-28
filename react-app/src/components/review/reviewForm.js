@@ -24,6 +24,7 @@ const ReviewForm = () => {
         if (data) {
             // console.log(dataArray, 'so i can see')
             setErrors(data)
+            setReview('');
         }
     }
     useEffect(() => {
