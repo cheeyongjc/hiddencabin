@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
+import Demo from '../demo/demo.js';
 import './loginForm.css';
 
 const LoginForm = () => {
@@ -33,32 +34,33 @@ const LoginForm = () => {
 
   return (
     <div className='loginContainer'>
-    <form onSubmit={onLogin} className='loginForm'>
-      <div className='loginDivErrors'>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
-      </div>
-      <div className='loginEmailDiv'>
-        <label htmlFor='email'>Email</label>
-        <input
-          name='email'
-          type='text'
-          value={email}
-          onChange={updateEmail}
-        />
-      </div>
-      <div className='loginPasswordDiv'>
-        <label htmlFor='password'>Password</label>
-        <input
-          name='password'
-          type='password'
-          value={password}
-          onChange={updatePassword}
-        />
+      <form onSubmit={onLogin} className='loginForm'>
+        <div className='loginDivErrors'>
+          {errors.map((error, ind) => (
+            <div key={ind}>{error}</div>
+          ))}
+        </div>
+        <div className='loginEmailDiv'>
+          <label htmlFor='email'>Email</label>
+          <input
+            name='email'
+            type='text'
+            value={email}
+            onChange={updateEmail}
+          />
+        </div>
+        <div className='loginPasswordDiv'>
+          <label htmlFor='password'>Password</label>
+          <input
+            name='password'
+            type='password'
+            value={password}
+            onChange={updatePassword}
+          />
         </div>
         <button type='submit' className='loginButton'>Login</button>
-    </form>
+      </form>
+     <Demo />
     </div>
   );
 };

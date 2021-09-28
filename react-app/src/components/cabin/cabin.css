@@ -1,7 +1,7 @@
 .oneCabinContainer{
     display: grid;
-    grid-template-columns: repeat(6, 5vw);
-    grid-template-rows: repeat(9, 5vh);
+    grid-template-columns: repeat(6, 95px);
+    grid-template-rows: repeat(9, 48px);
     grid-column: 3 / 9;
     grid-row: 6 / 15;
     overflow: hidden;
@@ -11,23 +11,23 @@
 }
 .oneCabinImageContainer{
     display:grid;
-    grid-template-columns: repeat(18, 5vw);
-    grid-template-rows: repeat(18, 5vh);
+    grid-template-columns: repeat(18, 95px);
+    grid-template-rows: repeat(18, 48px);
     grid-column: 2 /20;
     grid-row: 2 /19;
     background-size: cover;
 }
 .editDeleteContainer{
     display: grid;
-    grid-template-columns: repeat(6, 5vw);
-    grid-template-rows: (1, 5vh);
+    grid-template-columns: repeat(6, 95px);
+    grid-template-rows: (1, 48px);
     grid-column: 3 / 9;
     grid-row: 14/ 14;
 }
 .reviewListContainer{
     display: grid;
-    grid-template-columns: repeat(7, 5vw);
-    grid-template-rows: repeat(auto-fill, 5vh);
+    grid-template-columns: repeat(7, 95px);
+    grid-template-rows: repeat(auto-fill, 48px);
     grid-column: 10 / 17;
     grid-row: 3 / 13;
     overflow-y: scroll;

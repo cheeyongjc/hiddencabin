@@ -1,7 +1,7 @@
 .footerContainer{
     display: grid;
-    grid-template-columns: repeat(20, 5vw);
-    grid-template-rows: repeat(3, 5vh);
+    grid-template-columns: repeat(20, 95px);
+    grid-template-rows: repeat(3, 48px);
     grid-column: 1 / 20;
     grid-row: 19 / 22;
     overflow:hidden;

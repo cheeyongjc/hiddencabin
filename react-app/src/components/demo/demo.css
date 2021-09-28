@@ -6,9 +6,9 @@
     padding: 0px;
     margin: 0px;
     color:#20B2AA;
-    font-size: 18px;
-    grid-column: 10 / 11;
-    grid-row: 14 / 15;
-    text-align: left;
     font-size: 20px;
+}
+.demoButton{
+    grid-column: 2 / 3;
+    grid-row: 9 / 10;
 }

@@ -1,7 +1,7 @@
 .loginContainer{
     display:grid;
-    grid-template-columns: repeat(18, 5vw);
-    grid-template-rows: repeat(18, 5vh);
+    grid-template-columns: repeat(18, 95px);
+    grid-template-rows: repeat(18, 48px);
     grid-column: 2 /20;
     grid-row: 2 /19;
     /* border:solid; */
@@ -12,8 +12,8 @@
 }
 .loginForm{
     display:grid;
-    grid-template-columns: repeat(4, 5vw);
-    grid-template-rows: repeat(13, 5vh);
+    grid-template-columns: repeat(4, 95px);
+    grid-template-rows: repeat(13, 48px);
     grid-column: 8 / 12;
     grid-row: 5 / 15;
     background-color:rgba(108, 99, 167, 0.918);
@@ -44,5 +44,10 @@
     grid-column: 2 / 3;
     grid-row: 8 / 9;
     font-size: 20px;
+    text-align: left;
+}
+.demoButton{
+    grid-column: 9 / 10;
+    grid-row: 13 / 14;
     text-align: left;
 }
