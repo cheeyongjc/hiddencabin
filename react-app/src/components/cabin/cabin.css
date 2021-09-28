@@ -78,7 +78,7 @@
     font-weight: 600;
     font-size: 20px;
     font-style: normal;
-    color: #778899;
+    color: #263747;
     background-color: transparent;
     outline: none;
     border: transparent;
@@ -121,9 +121,10 @@
     font-weight: 600;
     font-size: 20px;
     font-style: normal;
-    color: #778899;
+    color: #263747;
     background-color: transparent;
     outline: none;
     border: transparent;
     padding: none;
+    text-align: right;
 }

@@ -26,6 +26,8 @@ function OneCabin() {
     const [beds, setBeds] = useState(0);
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
+    const [showEditReview, setEditReview] = useState(false);
+
     const deleteClick = async (e) => {
         e.preventDefault();
         await dispatch(deleteCabinsThunk(id));
@@ -64,85 +66,8 @@ function OneCabin() {
     }, [dispatch, name, price, guests, beds, description, image])
 
 
-    let editDom = (
-        <form className='editCabinForm' onSubmit={cabinUpdate}>
-            <div className='errorsContainer'>
-                {errors.map ?? errors.map((error, ind) => (
-                    <div key={ind}>{error}</div>
-                ))}
-            </div>
-
-            <div>
-                <label>
-                    Cabin name:
-                    <input
-                        type='text'
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                </label>
-            </div>
-
-            <div>
-                <label>
-                    Price per night: $
-                    <input
-                        type='integer'
-                        value={price}
-                        onChange={(e) => setPrice(e.target.value)}
-                    />
-                </label>
-            </div>
-
-            <div>
-                <label>
-                    Maximum number of guests:
-                    <input
-                        type='integer'
-                        value={guests}
-                        onChange={(e) => setGuests(e.target.value)}
-                    />
-                </label>
-            </div>
-
-            <div>
-                <label>
-                    Number of beds:
-                    <input
-                        type='integer'
-                        value={beds}
-                        onChange={(e) => setBeds(e.target.value)}
-                    />
-                </label>
-            </div>
-
-            <div>
-                <label>
-                    Description:
-                    <input
-                        type='textarea'
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
-                </label>
-            </div>
-
-            <div>
-                <label>
-                    Image URL:
-                    <input
-                        type='text'
-                        value={image}
-                        onChange={(e) => setImage(e.target.value)}
-                    />
-                </label>
-            </div>
-            <button className='updateCabinButton' type='submit'>Update Cabin</button>
-        </form>
-    )
-
     // ********************************************EDIT REVIEW ************************************************************************
-    let editReviewDom = (
+    let editReview = (
         <div className='reviewUpdateContainer'>
             <form className='reviewUpdateForm' >
                 <div className='errorsContainer'>
@@ -150,7 +75,6 @@ function OneCabin() {
                         <div key={ind}>{error}</div>
                     ))}
                 </div>
-
                 <div>
                     <label>
                         Review:
@@ -161,13 +85,10 @@ function OneCabin() {
                         />
                     </label>
                 </div>
-
-
             </form>
         </div>
     )
     // ********************************************RENDER ************************************************************************
-
     return (
         <>
             <div className='editDeleteContainer'>
@@ -186,7 +107,6 @@ function OneCabin() {
             </div>
 
             <div className='oneCabinContainer'>
-
                 <h1 className='oneCabinName oneCabinDiv'>
                     {oneCabin[0]?.name}
                 </h1>
@@ -202,14 +122,13 @@ function OneCabin() {
                 <div className='oneCabinDescription oneCabinDiv'>
                     Description: {oneCabin[0]?.description}
                 </div>
-
             </div>
 
             <div className='reviewListContainer'>
                 <h1 className='reviewHeading'> Reviews</h1>
                 <div className='reviewList'>
                     {revs.map(review => {
-                        if (review.cabinId === parseInt(id) && review.userId === user.id) {
+                        if (review.cabinId === parseInt(id) && review?.userId === user?.id) {
                             const deleteReviewClick = async () => {
                                 await dispatch(deleteReviewThunk(review.id));
                             };
@@ -230,6 +149,8 @@ function OneCabin() {
                     })}
                 </div>
             </div>
+
+
         </>
 
         //         {ReviewForm}
