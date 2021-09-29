@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteCabinsThunk, editCabinsThunk, getCabinsThunk } from '../../store/cabin.js';
+import { deleteCabinsThunk, getCabinsThunk } from '../../store/cabin.js';
 import { deleteReviewThunk, editReviewThunk, getReviewsThunk } from '../../store/review.js';
 import { useParams, useHistory } from 'react-router-dom';
-import ReviewForm from '../review/reviewForm.js';
 import './cabin.css';
 
 function OneCabin() {
@@ -18,15 +17,21 @@ function OneCabin() {
         return Object.values(state.reviews);
     });
     const oneCabin = cabins.filter((cabin) => cabin.id === +id);
+    const userReview = revs.filter((oneReview) => oneReview.userId === user?.id && oneReview.cabinId === +id);
+    console.log(userReview, '432423423423432423');
     const [review, setReview] = useState('');
     const [errors, setErrors] = useState([]);
-    const [name, setName] = useState('');
-    const [price, setPrice] = useState(0);
-    const [guests, setGuests] = useState(0);
-    const [beds, setBeds] = useState(0);
-    const [description, setDescription] = useState('');
-    const [image, setImage] = useState('');
-    const [showEditReview, setEditReview] = useState(false);
+    const [name] = useState('');
+    const [price] = useState(0);
+    const [guests] = useState(0);
+    const [beds] = useState(0);
+    const [description] = useState('');
+    const [image] = useState('');
+
+    const [editReview, setEditReview] = useState(userReview.length > 0 ? userReview[0].review : '');
+    // const [editReview, setEditReview] = useState('');
+    const [showEditReview, setShowEditReview] = useState(false);
+
 
     const deleteClick = async (e) => {
         e.preventDefault();
@@ -35,27 +40,23 @@ function OneCabin() {
         // setTimeout(() => {
         // }, 500);
     };
-
-    const cabinUpdate = async (e, id) => {
+    const editReviewUpdate = async (e) => {
         e.preventDefault();
-        let cab = await dispatch(editCabinsThunk(id, { hostId: user.Id, name, price, guests, beds, description, image }))
-        if (cab) {
-            setErrors(cab)
+        let payload = {
+            review: editReview,
+            cabinId: id,
+            userId: user.id,
+            id: userReview[0].id
         }
-    };
-
-    const reviewUpdate = async (e, id, userId, cabinId) => {
-        e.preventDefault();
-        let rev = await dispatch(editReviewThunk(id, { userId: userId, cabinId: cabinId, review }))
+        let rev = await dispatch(editReviewThunk(payload))
         if (rev) {
             setErrors(rev)
+            setEditReview('');
+            setShowEditReview(false);
         }
     };
     const handleEdit = (e) => {
         history.push(`/cabins/edit/${id}`);
-    }
-    const handleReviewEdit = (e) => {
-        history.push(`/cabins/review/edit/${id}`);
     }
     useEffect(() => {
         dispatch(getReviewsThunk(id))
@@ -65,29 +66,6 @@ function OneCabin() {
         dispatch(getCabinsThunk(id))
     }, [dispatch, name, price, guests, beds, description, image])
 
-
-    // ********************************************EDIT REVIEW ************************************************************************
-    let editReview = (
-        <div className='reviewUpdateContainer'>
-            <form className='reviewUpdateForm' >
-                <div className='errorsContainer'>
-                    {errors.map ?? errors.map((error, ind) => (
-                        <div key={ind}>{error}</div>
-                    ))}
-                </div>
-                <div>
-                    <label>
-                        Review:
-                        <input
-                            type='textarea'
-                            value={review}
-                            onChange={(e) => setReview(e.target.value)}
-                        />
-                    </label>
-                </div>
-            </form>
-        </div>
-    )
     // ********************************************RENDER ************************************************************************
     return (
         <>
@@ -135,7 +113,7 @@ function OneCabin() {
                             return (
                                 <div key={review.id} className='reviewDiv'>
                                     {review.review}
-                                    <button className='editReviewButton editDeleteReviewButton' onClick={handleReviewEdit}>Edit</button>
+                                    <button className='editReviewButton editDeleteReviewButton' onClick={() => { showEditReview === false ? setShowEditReview(true) : setShowEditReview(false) }}>Edit</button>
                                     <button className='deleteReviewButton editDeleteReviewButton' onClick={deleteReviewClick}>Delete</button>
                                 </div>
                             )
@@ -151,29 +129,36 @@ function OneCabin() {
             </div>
 
 
-        </>
+            {showEditReview === true ?
+                <div className='editReviewFormContainer'>
+                    <form className='editReviewForm' onSubmit={editReviewUpdate}>
+                        <div className='editReviewFormErrors'>
+                            {
+                                errors.map && errors.map((error) => (<div key={error}>{error}</div>))
+                            }
+                        </div>
 
-        //         {ReviewForm}
-        //         <div className='reviewList'>
-        //             {revs.map(rev => {
-        //                 if (rev.cabinId == id) {
-        //                     return (
-        //                         <div className='singleReview' key={rev.id}>
-        //                             <div>
-        //                                 Review: {rev.review}
-        //                             </div>
-        //                             <div className='deleteReview'>
-        //                                 <button onClick={e => deleteReviewClick(e, rev.id)}>Delete Review</button>
-        //                                 {editReviewDom}
-        //                                 <button onClick={e => reviewUpdate(e, rev.id, rev.userId, rev.cabinId)}>update Review</button>
-        //                             </div>
-        //                         </div>
-        //                     )
-        //                 }
-        //             })}
-        //         </div>
-        //     </>
-        // </>
+                        <div className='editReviewNameDiv'>
+                            <label>
+                                Edit your review:
+                            </label>
+                        </div>
+                        <div className='editReviewInputDiv'>
+                            <input className='editReviewInput'
+                                type='textarea'
+                                value={editReview}
+                                onChange={(e) => setEditReview(e.target.value)}
+                            />
+                        </div>
+                        <button className='updateEditReviewButton' type='submit'>Update Review</button>
+                    </form>
+                </div>
+                :
+                null
+            }
+
+
+        </>
     )
 }
 

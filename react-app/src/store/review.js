@@ -67,7 +67,8 @@ export const deleteReviewThunk = (id) => async (dispatch) => {
     }
 };
 
-export const editReviewThunk = (id, payload) => async (dispatch) => {
+export const editReviewThunk = (payload) => async (dispatch) => {
+    const {id} = payload;
     const res = await fetch(`/api/reviews/${id}`, {
         method: 'PUT',
         headers: {

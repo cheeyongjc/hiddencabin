@@ -3,7 +3,6 @@ import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import LogoutButton from '../auth/LogoutButton';
-import Demo from '../demo/demo';
 
 
 const NavBar = ({ isLoaded }) => {
