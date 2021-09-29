@@ -12,6 +12,7 @@ def allcabins():
     cabins = Cabin.query.all()
     return {'cabins': [cabin.to_dict() for cabin in cabins]}
 
+
 @cabin_routes.route('/', methods=['POST'])
 @login_required
 def create_cabin():
@@ -53,6 +54,7 @@ def edit_cabin(id):
         cabin.price = form.data['price'] if form.data['price'] else cabin.price
         cabin.guests = form.data['guests'] if form.data['guests'] else cabin.guests
         cabin.description = form.data['description'] if form.data['description'] else cabin.description
+        cabin.beds = form.data['beds'] if form.data['beds'] else cabin.beds
         cabin.image = form.data['image'] if form.data['image'] else cabin.image
         db.session.commit()
         return {'message': id}

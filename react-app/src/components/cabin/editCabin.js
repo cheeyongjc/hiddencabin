@@ -29,12 +29,12 @@ function EditCabin() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const cabinSubmit = await dispatch(editCabinsThunk(id, { hostId: user.Id, name, price, guests, beds, description, image }))
+        let cabinSubmit = await dispatch(editCabinsThunk(id, { hostId: user.Id, name, price, guests, beds, description, image }))
         if (cabinSubmit) {
             setErrors(cabinSubmit)
         }
     }
-    const cancelUpdate = async (e) =>{
+    const cancelUpdate = async (e) => {
         history.push(`/cabins/${id}`);
     }
     if (!errors.map) {
@@ -42,9 +42,9 @@ function EditCabin() {
     }
     return (
         <>
-        <div className='oneCabinImageContainer'>
-        <img src={oneCabin[0]?.image} alt='cabinImage' className='oneCabinImage' />
-        </div>
+            <div className='oneCabinImageContainer'>
+                <img src={oneCabin[0]?.image} alt='cabinImage' className='oneCabinImage' />
+            </div>
             <div className='editCabinContainer'>
                 <form className='editCabinForm' onSubmit={handleSubmit}>
                     <div className='editCabinErrors'>
