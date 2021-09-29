@@ -13,7 +13,6 @@ import OneCabin from './components/cabin/cabin';
 import ReviewForm from './components/review/reviewForm';
 import EditCabin from './components/cabin/editCabin';
 import Footer from './components/navigation/footer';
-import Demo from './components/demo/demo';
 // import UsersList from './components/UsersList';
 // import User from './components/User';
 

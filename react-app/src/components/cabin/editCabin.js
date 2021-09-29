@@ -24,7 +24,7 @@ function EditCabin() {
 
     useEffect(() => {
         dispatch(getCabinsThunk(id))
-    }, [name, price, guests, beds, description, image])
+    }, [dispatch, name, price, guests, beds, description, image])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
