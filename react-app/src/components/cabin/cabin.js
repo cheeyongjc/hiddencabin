@@ -51,6 +51,7 @@ function OneCabin() {
         let rev = await dispatch(editReviewThunk(payload))
         if (rev) {
             setErrors(rev)
+            if(!errors.map)
             setEditReview('');
             setShowEditReview(false);
         }
@@ -60,7 +61,7 @@ function OneCabin() {
     }
     useEffect(() => {
         dispatch(getReviewsThunk(id))
-    }, [dispatch, review, id])
+    }, [dispatch, review, editReview, id])
 
     useEffect(() => {
         dispatch(getCabinsThunk(id))
