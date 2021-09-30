@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { addReviewThunk, getReviewsThunk } from '../../store/review';
 import './reviewForm.css';
 
 const ReviewForm = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
+    const history = useHistory();
     const user = useSelector(state => state.session.user);
     // const cabin = useSelector(state => state.cabins);
     const [errors, setErrors] = useState([]);
@@ -16,15 +17,19 @@ const ReviewForm = () => {
     });
     const userReview = revs.filter((oneReview) => oneReview.userId === user?.id && oneReview.cabinId === +id);
     const reviewSubmit = async (e) => {
-        e.preventDefault();
-        let data = await dispatch(addReviewThunk({
-            userId: user.id,
-            cabinId: id,
-            review
-        }))
-        if (data) {
-            setErrors(data)
-            setReview('');
+        if (!user) {
+            history.push(`/login`);
+        } else {
+            e.preventDefault();
+            let data = await dispatch(addReviewThunk({
+                userId: user.id,
+                cabinId: id,
+                review
+            }))
+            if (data) {
+                setErrors(data)
+                setReview('');
+            }
         }
     }
     useEffect(() => {
