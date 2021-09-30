@@ -1,6 +1,6 @@
 # HiddenCabin
 
-By: Jonathan Chan -*[HiddenCabin](https://hiddencabin.herokuapp.com/)*
+By: Jonathan Chan -Live site: *[HiddenCabin](https://hiddencabin.herokuapp.com/)*
 
 ## Installation
 
