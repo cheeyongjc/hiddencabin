@@ -1,6 +1,25 @@
 # HiddenCabin
 
-By: Jonathan Chan -Live site: *[HiddenCabin](https://hiddencabin.herokuapp.com/)*
+By: Jonathan Chan - Live site: *[HiddenCabin](https://hiddencabin.herokuapp.com/)*
+
+HiddenCabin is an inspiration from both *[airbnb](https://www.airbnb.com/)* and *[Getaway](https://getaway.house/)*. It is a fullstack React Redux application with a Python backend that incorporates Flask and SQLAlchemy. The database system uses PostgreSQL and the site is hosted on Heroku. 
+
+## Features
+
+### Signup
+(https://capstonephotodump.s3.us-east-2.amazonaws.com/capstone/signup.JPG)
+
+### Login
+(https://capstonephotodump.s3.us-east-2.amazonaws.com/capstone/login.JPG)
+
+### Homepage
+(https://capstonephotodump.s3.us-east-2.amazonaws.com/capstone/homepage.JPG)
+
+### Create Cabin
+(https://capstonephotodump.s3.us-east-2.amazonaws.com/capstone/create.JPG)
+
+### Leave a Review
+(https://capstonephotodump.s3.us-east-2.amazonaws.com/capstone/reviews.JPG)
 
 ## Installation
 
