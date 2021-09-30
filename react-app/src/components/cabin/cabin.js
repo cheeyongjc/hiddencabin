@@ -26,10 +26,7 @@ function OneCabin() {
     const [beds, setbeds] = useState(0);
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
-
-    const [editReview, setEditReview] = useState(userReview.length > 0 ? userReview[0].review : '');
-    console.log(userReview[0], 'here is my userReview');
-    // const [editReview, setEditReview] = useState('');
+    const [editReview, setEditReview] = useState('');
     const [showEditReview, setShowEditReview] = useState(false);
 
 
@@ -52,10 +49,10 @@ function OneCabin() {
         if (rev) {
             setErrors(rev)
             if (!errors.map)
-                setEditReview('');
-            setShowEditReview(false);
+                setShowEditReview(false);
         }
     };
+
     const handleEdit = (e) => {
         history.push(`/cabins/edit/${id}`);
     }
@@ -114,7 +111,10 @@ function OneCabin() {
                             return (
                                 <div key={review.id} className='reviewDiv'>
                                     {review.review}
-                                    <button className='editReviewButton editDeleteReviewButton' onClick={() => { showEditReview === false ? setShowEditReview(true) : setShowEditReview(false) }}>Edit</button>
+                                    <button className='editReviewButton editDeleteReviewButton' onClick={() => {
+                                        showEditReview === false ? setShowEditReview(true) : setShowEditReview(false)
+                                        setEditReview(userReview[0].review)
+                                    }}>Edit</button>
                                     <button className='deleteReviewButton editDeleteReviewButton' onClick={deleteReviewClick}>Delete</button>
                                 </div>
                             )
@@ -129,7 +129,6 @@ function OneCabin() {
                 </div>
             </div>
 
-
             {showEditReview &&
                 <div className='editReviewFormContainer'>
                     <form className='editReviewForm' onSubmit={editReviewUpdate}>
@@ -138,7 +137,6 @@ function OneCabin() {
                                 errors.map && errors.map((error) => (<div key={error}>{error}</div>))
                             }
                         </div>
-
                         <div className='editReviewNameDiv'>
                             <label>
                                 Edit your review:

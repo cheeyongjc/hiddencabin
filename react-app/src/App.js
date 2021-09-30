@@ -64,7 +64,7 @@ function App() {
           <CabinForm />
         </Route>
 
-        <Route path='/cabins/:id' exact={true} >
+        <Route path='/cabins/:id' exact={true}>
           <OneCabin />
           <ReviewForm />
         </Route>
