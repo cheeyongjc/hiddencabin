@@ -7,19 +7,19 @@ HiddenCabin is an inspiration from both *[airbnb](https://www.airbnb.com/)* and 
 ## Features
 
 ### Signup
-!(https://capstonephotodump.s3.us-east-2.amazonaws.com/capstone/signup.JPG)
+![signup](https://capstonephotodump.s3.us-east-2.amazonaws.com/capstone/signup.JPG)
 
 ### Login
-!(https://capstonephotodump.s3.us-east-2.amazonaws.com/capstone/login.JPG)
+![login](https://capstonephotodump.s3.us-east-2.amazonaws.com/capstone/login.JPG)
 
 ### Homepage
-!(https://capstonephotodump.s3.us-east-2.amazonaws.com/capstone/homepage.JPG)
+![homepage](https://capstonephotodump.s3.us-east-2.amazonaws.com/capstone/homepage.JPG)
 
 ### Create Cabin
-!(https://capstonephotodump.s3.us-east-2.amazonaws.com/capstone/create.JPG)
+![createcabin](https://capstonephotodump.s3.us-east-2.amazonaws.com/capstone/create.JPG)
 
 ### Leave a Review
-!(https://capstonephotodump.s3.us-east-2.amazonaws.com/capstone/reviews.JPG)
+![leavereview](https://capstonephotodump.s3.us-east-2.amazonaws.com/capstone/reviews.JPG)
 
 ## Installation
 
