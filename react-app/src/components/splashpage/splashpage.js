@@ -5,9 +5,9 @@ function Splashpage() {
 
     return (
         <div className='splashContainer'>
-            <div className='splashTitle'>
-                <h1>Escape to a HiddenCabin</h1>
-            </div>
+                <div className='splashTitleContainer'>
+                    <h1 className='splashTitle'>Escape to a HiddenCabin</h1>
+                </div>
         </div>
     )
 }

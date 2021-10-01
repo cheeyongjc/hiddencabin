@@ -1,10 +1,9 @@
 .oneCabinContainer{
     display: grid;
-    grid-template-columns: repeat(6, 95px);
-    grid-template-rows: repeat(9, 48px);
+    grid-template-columns: repeat(6, 5vw);
+    grid-template-rows: repeat(9, 5vh);
     grid-column: 3 / 9;
     grid-row: 6 / 15;
-    overflow: hidden;
     margin: 0px;
     padding: 0px;
     background-color:rgba(108, 99, 167, 0.89);
@@ -36,6 +35,7 @@
 }
 .reviewList{
     display:grid;
+    grid-template-columns: repeat(1, 1fr);
     grid-template-rows: repeat(auto-fill, auto);
     row-gap: 3vh;
     grid-column: 2 / 7;
@@ -46,7 +46,7 @@
     font-weight: 600;
     font-size: 40px;
     font-style: normal;
-    color: #778899;
+    color: #ECF0F1 ;
     grid-column-start: 2;
     grid-row: 1 / 2;
     width: 300px;
@@ -56,7 +56,7 @@
     font-weight: 600;
     font-size: 20px;
     font-style: normal;
-    color: #778899;
+    color: #ECF0F1 ;
     width: 100%;
 }
 .oneCabinImage{
@@ -71,14 +71,14 @@
     font-weight: 600;
     font-size: 20px;
     font-style: normal;
-    color: #778899;
+    color: #ECF0F1 ;
 }
 .editDeleteButton{
     font-family: 'Hina Mincho';
     font-weight: 600;
     font-size: 20px;
     font-style: normal;
-    color: #263747;
+    color: #2ECC71 ;
     background-color: transparent;
     outline: none;
     border: transparent;
@@ -121,7 +121,7 @@
     font-weight: 600;
     font-size: 20px;
     font-style: normal;
-    color: #263747;
+    color: #2ECC71 ;
     background-color: transparent;
     outline: none;
     border: transparent;
@@ -147,7 +147,7 @@
     overflow: hidden;
 }
 .editReviewFormErrors{
-    color: red;
+    color: #ECF0F1 ;
     font-size: 18px;
     grid-row: 1 / 2;
     grid-column: 2 / 7;
@@ -156,7 +156,7 @@
     font-family: 'Hina Mincho';
     font-weight: 600;
     font-style: normal;
-    color: #778899;
+    color: #ECF0F1 ;
     font-size: 20px;
     grid-column: 3 / 6;
     grid-row: 2 / 3;
@@ -182,7 +182,7 @@
     font-weight: 600;
     font-size: 18px;
     font-style: normal;
-    color: #263747;
+    color: #2ECC71;
     background-color: transparent;
     outline: none;
     border: transparent;
