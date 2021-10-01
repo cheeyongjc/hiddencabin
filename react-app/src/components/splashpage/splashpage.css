@@ -1,11 +1,10 @@
 .splashContainer{
     display: grid;
-    grid-template-columns: repeat(18, 95px);
-    grid-template-rows: repeat(18, 48px);
+    grid-template-columns: repeat(18, 5vw);
+    grid-template-rows: repeat(17, 5vh);
     grid-column: 2 /20;
     grid-row: 2 /19;
     overflow: hidden;
-    position: relative;
     background-image: url(cabinpic1.jpg);
     background-size: cover;
     background-repeat: no-repeat;
@@ -15,16 +14,23 @@
     animation-iteration-count: infinite;
 }
 
-.splashTitle{
-    font-size: 30px;
-    color:#20B2AA;
+.splashTitleContainer{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 1fr);
+    grid-template-rows: repeat(auto-fit, 1fr);
+    grid-column: 2 / 7;
+    grid-row: 8 /9;
 }
+
 .splashTitle{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -100%);
-    text-align: center;
+    grid-column: span 1;
+    grid-row: span 1;
+    font-size: 40px;
+    margin: 0px;
+    color:#20B2AA;
+    background-color: rgba(0, 0, 0, 0.541);
+    background-position: center;
+    background-size: cover;
 }
 
 @keyframes slide {

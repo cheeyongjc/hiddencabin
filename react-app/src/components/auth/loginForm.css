@@ -19,7 +19,7 @@
     background-color:rgba(108, 99, 167, 0.918);
 }
 .loginDivErrors{
-    color: red;
+    color: #ECF0F1;
     grid-column: 2 / 4;
 }
 .loginEmailDiv{

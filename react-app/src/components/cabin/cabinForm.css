@@ -23,7 +23,7 @@
     color:#20B2AA;
 }
 .cabinFormErrors{
-    color: red;
+    color: #ECF0F1;
     font-size: 15px;
     grid-column: 1 / 5;
     grid-row: 1 / 6;

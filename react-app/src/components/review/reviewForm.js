@@ -46,19 +46,14 @@ const ReviewForm = () => {
                                 errors.map && errors.map((error) => (<div key={error}>{error}</div>))
                             }
                         </div>
-
-                        <div className='reviewNameDiv'>
-                            <label>
+                            <label className='reviewName'>
                                 Leave a review:
                             </label>
-                        </div>
-                        <div className='reviewInputDiv'>
                             <input className='reviewInput'
                                 type='textarea'
                                 value={review}
                                 onChange={(e) => setReview(e.target.value)}
                             />
-                        </div>
                         <button className='addReviewButton' type='submit'>Add Review</button>
                     </form>
                 </div>
