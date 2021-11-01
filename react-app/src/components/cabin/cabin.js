@@ -58,7 +58,7 @@ function OneCabin() {
     }
     useEffect(() => {
         dispatch(getReviewsThunk(id))
-    }, [dispatch, editReview, id])
+    }, [dispatch, editReview, id, showEditReview])
 
     useEffect(() => {
         dispatch(getCabinsThunk(id))
@@ -112,8 +112,8 @@ function OneCabin() {
                                 <div key={review.id} className='reviewDiv'>
                                     {review.review}
                                     <button className='editReviewButton editDeleteReviewButton' onClick={() => {
-                                        showEditReview === false ? setShowEditReview(true) : setShowEditReview(false)
-                                        setEditReview(userReview[0].review)
+                                        showEditReview === false ? setShowEditReview(true) : setShowEditReview(false);
+                                        setEditReview(userReview[0].review);
                                     }}>Edit</button>
                                     <button className='deleteReviewButton editDeleteReviewButton' onClick={deleteReviewClick}>Delete</button>
                                 </div>
